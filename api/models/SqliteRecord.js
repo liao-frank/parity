@@ -26,22 +26,44 @@ class SqliteRecord {
     return {};
   }
 
-  // filters record object by schema keys. No other columns allowed, boo!
-  _generateRecord(recordObj) {
+  _schema() {
     const schema = this.schema();
-    const filteredRecord = {};
-
-    for (let key in record) {
-      if (key in schema) {
-        filteredRecord[key] = record[key];
-      }
+    if (!schema.KEY) {
+      schema['_id'] = 'varchar(255)';
+      schema['KEY'] = '(_id)';
     }
-    return filteredRecord;
+    return schema;
+  }
+
+  // filters record object by schema keys. No other columns allowed, boo!
+  // _generateRecord(recordObj) {
+  //   const schema = this._schema();
+  //   const filteredRecord = {};
+  //
+  //   for (let key in record) {
+  //     if (key in schema) {
+  //       filteredRecord[key] = record[key];
+  //     }
+  //   }
+  //   return filteredRecord;
+  // }
+
+  find(id, callback=()=>{}) {
+    const name = this.constructor.name;
+
+    let statement = `SELECT * FROM ${name} WHERE _id = '${id}'`;
+    this.db.get(statement, [], callback);
+  }
+
+  all(callback=()=>{}) {
+    const name = this.constructor.name;
+    let statement = `SELECT * FROM ${name}`;
+    this.db.all(statement, [], callback);
   }
 
   _createTable(callback=()=>{}) {
     const name = this.constructor.name;
-    const schema = this.schema();
+    const schema = this._schema();
 
     let schemaString = Object.entries(schema)
       .filter(([columnName, spec]) => columnName !== 'KEY')
@@ -50,7 +72,7 @@ class SqliteRecord {
     if (schema.KEY) {
       schemaString += `, PRIMARY KEY ${schema.KEY}`;
     }
-    console.log(schemaString);
+
     let statement = `CREATE TABLE ${name} (${schemaString})`;
     this.db.run(statement, [], callback);
   }
