@@ -49,11 +49,11 @@ class Half extends Component {
    * actions, and use provided callback for async actions.
    * DO NOT USE BOTH. Both processes will overwrite previous items, so the sync
    * data population will always be overwritten.
-   * @param  {Function} callback async data handler, accepts (items)
-   * @return {Object}            OPTIONAL items
+   * @param  {Function} callback async data handler, accepts (err, items)
+   * @return {Array}            OPTIONAL [err, items]
    */
   init(callback) {
-    
+
   }
 
   /**
@@ -64,7 +64,7 @@ class Half extends Component {
    * Supports both async and sync data retrieval. Use return value for sync
    * actions, and use provided callback for async actions.
    * USING BOTH IS NOT SUPPORTED.
-   * @param  {Function} callback async data handler, accepts (items)
+   * @param  {Function} callback async data handler, accepts (err, items)
    * @return {Object}            OPTIONAL items
    */
   // refresh(callback) {
@@ -72,18 +72,20 @@ class Half extends Component {
   // }
 
   _init(callback) {
-    const items = this.init((items) => {
-      if (items) {
+    const [err, items] = this.init((err, items) => {
+      if (err) {
+        callback(err, null);
+      }
+      else if (items) {
         this._onInit(items);
-        callback(items);
+        callback(null, items);
       }
       else {
         throw 'Async `init` handler was used, but no data was passed.';
       }
-    });
-    if (items) {
-      // TODO
-      callback(items);
+    }) || [];
+    if (err || items) {
+      callback(err, items);
     }
   }
 
@@ -92,17 +94,20 @@ class Half extends Component {
   }
 
   _refresh(callback) {
-    const items = this.refresh((items) => {
-      if (items) {
+    const [err, items] = this.refresh((err, items) => {
+      if (err) {
+        callback(err, null);
+      }
+      else if (items) {
         this._onRefresh(items);
-        callback(items);
+        callback(null, items);
       }
       else {
-        throw 'Async `refresh` handler was used, but no data was passed';
+        console.error('Async `refresh` handler was used, but no data was passed.');
       }
-    });
-    if (items) {
-      callback(items);
+    }) || [];
+    if (err || items) {
+      callback(err, items);
     }
   }
 
