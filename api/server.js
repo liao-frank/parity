@@ -2,25 +2,30 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const { PORT } = require(__dirname + '/config.js');
+const { PORT, USE_WEBSOCKETS } = require(__dirname + '/config.js');
 
-const LinkRoutes = require(__dirname + '/routes/LinkRoutes.js');
+const LinkSockets = require(__dirname + '/sockets/LinkSockets.js');
 
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server, {
+  transports: USE_WEBSOCKETS ? ['polling', 'websocket'] : ['polling']
+});
+io.set('origins', 'http://localhost:*');
 
-app.use(bodyParser.json()); // for parsing application/json
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
 // logger
 app.use(morgan('tiny'));
 
-// require controllers
-LinkRoutes(app);
+// sockets
+io.on('connection', (socket) => {
+  LinkSockets(socket);
+});
 
 // start server
-app.listen(PORT, (err) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log(`Listening on port ${PORT}..`);
-});
+server.listen(PORT);
