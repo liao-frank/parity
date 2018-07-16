@@ -14,7 +14,7 @@ export const invalidateHalf = (half) => {
   return {
     type: INVALIDATE_HALF,
     half
-  };;
+  };
 }
 
 const requestHalf = (half) => {
@@ -37,34 +37,41 @@ const fetchHalf = (half, retriever) => {
   return (dispatch) => {
     dispatch(requestHalf(half));
 
-    return retriever((err, items) => {
+    const onRetrieve = (err, items) => {
       if (err) {
         console.error(`Error when retrieving ${half}: ${err}`);
         items = {};
       }
-      dispatch(receiveHalf(half, items));
-    });
+      else {
+        dispatch(receiveHalf(half, items));
+      }
+    };
+
+    const [err, items] = retriever(onRetrieve) || [];
+    if (err || items) {
+      onRetrieve(err, items);
+    }
   };
 };
 
 const shouldFetchHalf = (half, state) => {
-  const half = state[half];
-  if (!half) {
+  const halfData = state[half];
+  if (!halfData) {
     return true;
   }
-  else if (half.isFetching) {
+  else if (halfData.isFetching) {
     return false;
   }
-  else if (!half.items || Object.keys(half.items) === 0) {
+  else if (!halfData.items || Object.keys(halfData.items) === 0) {
     return true;
   }
-  return half.didInvalidate;
+  return halfData.didInvalidate;
 };
 
-export const fetchHalfIfNeeded(half) {
+export const fetchHalfIfNeeded = (half, retriever) => {
   return (dispatch, getState) => {
     if (shouldFetchHalf(half, getState())) {
-      return dispatch(fetchHalf());
+      return dispatch(fetchHalf(half, retriever));
     }
   };
 };

@@ -4,93 +4,64 @@ import {
   INVALIDATE_ALL_LINKS,
   RECEIVE_ADDED_LINKS,
   RECEIVE_DELETED_LINKS
-} from '../actions/linkActions';
+} from '../actions';
+import ManyToMany from '../utils/ManyToMany';
 
 export default (
   state = {
-    links: {
-      byLeft: {},
-      byRight: {},
-      didInvalidate: false,
-      isFetching: false
-    }
+    links: new ManyToMany(),
+    didInvalidate: false,
+    isFetching: false
   },
   action
 ) => {
-  switch(action.type) {
+  let copyLinks;
+  const { type, links } = action;
+
+  switch(type) {
     case REQUEST_ALL_LINKS:
-      return Object.assign({}, state, {
-        links: Object.assign({}, state.links, {
-          isFetching: true,
-          didInvalidate: false
-        })
-      });
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      };
+
     case RECEIVE_ALL_LINKS:
-      return Object.assign({}, state, {
-        links: Object.assign({}, state.links, mapLinks(action.links), {
-          isFetching: false,
-          didInvalidate: false,
-          lastUpdated: action.receivedAt
-        })
-      });
+      const newLinks = new ManyToMany();
+      action.links.forEach(l => newLinks.addLink(l));
+      return {
+        ...state,
+        links: newLinks,
+        isFetching: false,
+        didInvalidate: false,
+        lastUpdated: action.receivedAt
+      };
+
     case INVALIDATE_ALL_LINKS:
-      return Object.assign({}, state, {
-        links: Object.assign({}, state.links, {
-          didInvalidate: true
-        })
-      });
+      return {
+        ...state,
+        didInvalidate: true
+      };
+
     case RECEIVE_ADDED_LINKS:
-      const {
-        byLeft: addedByLeft,
-        byRight: addedByRight
-      } = mapLinks(action.links);
-      return Object.assign({}, state, {
-        links: Object.assign({}, state.links, {
-          byLeft: Object.assign({}, state.links.byLeft, addedByLeft),
-          byRight: Object.assign({}, state.links.byRight, addedByRight)
-        })
-      });
+      copyLinks = new ManyToMany(state.links);
+      const addedLinks = Array.isArray(links) ? links : [links];
+      addedLinks.forEach(l => copyLinks.addLink(l));
+      return {
+        ...state,
+        links: copyLinks
+      };
+
     case RECEIVE_DELETED_LINKS:
-      const {
-        byLeft: deletedByLeft,
-        byRight: deletedByRight
-      } = unmapLinks(action.links);
-      return Object.assign({}, state, {
-        links: Object.assign({}, state.links, {
-          byLeft: Object.assign({}, state.links.byLeft, deletedByLeft),
-          byRight: Object.assign({}, state.links.byRight, deletedByRight)
-        })
-      });
+      copyLinks = new ManyToMany(state.links);
+      const deletedLinks = Array.isArray(links) ? links : [links];
+      deletedLinks.forEach(l => copyLinks.deleteLink(l));
+      return {
+        ...state,
+        links: copyLinks
+      };
+
+    default:
+      return state;
   }
 };
-
-const mapLinks = (links) => {
-  const maps = {
-    byLeft: {},
-    byRight: {}
-  };
-
-  links.forEach((link) => {
-    const { leftId, rightId } = link;
-    maps.byLeft[leftId] = link;
-    maps.byRight[rightId] = link;
-  });
-
-  return maps;
-};
-
-// an unmap is just an object for (un)assigning into previous map
-const unmapLinks = (links) => {
-  const unmaps = {
-    byLeft: {},
-    byRight: {}
-  };
-
-  links.forEach((link) => {
-    const { leftId, rightId } = link;
-    unmaps.byLeft[leftId] = undefined;
-    unmaps.byRight[rightId] = undefined;
-  });
-
-  return unmaps;
-}

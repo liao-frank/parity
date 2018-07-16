@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { connect as reduxConnect } from 'react-redux';
+import {
+  invalidateHalf,
+  fetchHalfIfNeeded
+} from '../../store/actions';
 
 /**
  * An interface for writing a Half of Parity. This interface includes
@@ -10,21 +15,35 @@ import React, { Component } from 'react';
  * by the subclass, then those features will simply not exist for the user.
  * @extends Component
  */
-class Half extends Component {
+export class Half extends Component {
   constructor(props) {
     super(props);
+    if (!['left', 'right'].includes(props.half)) {
+      throw new Error(`Invalid half specified: ${props.half}`);
+    }
     this.state = {
       title: props.title,
-      half: props.half,
-      items: {}
+      items: {},
+      didInvalidate: false,
+      isFetching: false,
+      lastUpdated: null
     }
+    this._init();
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const { half, halfState } = props;
+    return {
+      ...halfState[half]
+    };
   }
 
   render() {
-    const {title, half, items} = this.state;
+    const { half } = this.props;
+    const { title, items } = this.state;
     return (
       <div
-        className={half + 'half'}
+        className={half + ' half'}
       >
         <h1>{title}</h1>
         <p>{JSON.stringify(items)}</p>
@@ -72,58 +91,28 @@ class Half extends Component {
   // }
 
   _init(callback) {
-    const [err, items] = this.init((err, items) => {
-      if (err) {
-        callback(err, null);
-      }
-      else if (items) {
-        this._onInit(items);
-        callback(null, items);
-      }
-      else {
-        throw 'Async `init` handler was used, but no data was passed.';
-      }
-    }) || [];
-    if (err || items) {
-      callback(err, items);
-    }
-  }
-
-  _onInit(items) {
-    this._setItems(items);
+    const { half, dispatch } = this.props;
+    dispatch(fetchHalfIfNeeded(half, this.init));
   }
 
   _refresh(callback) {
-    const [err, items] = this.refresh((err, items) => {
-      if (err) {
-        callback(err, null);
-      }
-      else if (items) {
-        this._onRefresh(items);
-        callback(null, items);
-      }
-      else {
-        console.error('Async `refresh` handler was used, but no data was passed.');
-      }
-    }) || [];
-    if (err || items) {
-      callback(err, items);
-    }
+    const { half, dispatch } = this.props;
+    dispatch(invalidateHalf(half));
+    dispatch(fetchHalfIfNeeded(half, this.refresh));
   }
 
-  _onRefresh(items) {
-    this._setItems(item);
-  }
-
-  _setItems(items) {
-    this.setState({
-      items
-    });
-  }
-
-  _hasCategories() {
-
-  }
+  // _hasCategories() {
+  //
+  // }
 }
 
-export default Half;
+const mapStateToProps = (state) => {
+  const { halfState } = state;
+  return {
+    halfState
+  };
+};
+
+export const connect = (Component) => {
+    return reduxConnect(mapStateToProps)(Component);
+};

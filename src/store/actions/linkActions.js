@@ -33,28 +33,29 @@ export const invalidateAllLinks = () => {
 const fetchAllLinks = (socket) => {
   return (dispatch) => {
     dispatch(requestAllLinks());
-    return socket.emit('fetch-all-links', {});
+    return socket.emit('index-links', {});
   };
 };
 
-const shouldFetchAllLinks(state) {
-  const links = state.links;
+const shouldFetchAllLinks = (state) => {
+  const { links } = state.linkState;
   if (!links) {
     return true;
   }
   else if (links.isFetching) {
     return false;
   }
-  else if (!links.data || Object.keys(links.data).lengths === 0) {
+  else if (Object.keys(links.fromLeft).length === 0 ||
+  Object.keys(links.fromRight).length === 0) {
     return true;
   }
   return links.didInvalidate;
 };
 
-export const fetchLinksIfNeeded() {
+export const fetchLinksIfNeeded = () => {
   return (dispatch, getState) => {
     const state = getState();
-    const socket = state.socket;
+    const socket = state.appState.socket;
     if (shouldFetchAllLinks(state)) {
       return dispatch(fetchAllLinks(socket));
     }

@@ -1,29 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import io from 'socket.io-client';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
 import Parity from './components/Parity';
+import LeftHalf from './components/LeftHalf';
+import RightHalf from './components/RightHalf';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
-ReactDOM.render(<Parity
-  // leftHalf={}
-  // rightHalf={}
-/>, document.getElementById('root'));
+const store = configureStore();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Parity
+      LeftHalf={LeftHalf}
+      RightHalf={RightHalf}
+    />
+  </Provider>,
+  document.getElementById('root'));
 registerServiceWorker();
 
-const socket = io('http://localhost:6007');
-window.socket = socket;
-
-const loggedEvents = [
-  'index-links',
-  'add-link',
-  'delete-link',
-  'find-links'
-];
-
-for (let event of loggedEvents) {
-  socket.on(event, (data) => {
-    console.log(event, data);
-  });
+window.getLinks = () => {
+  window.socket.emit('index-links', {});
 }
+
+window.addLink = (leftId, rightId) => {
+  window.socket.emit('add-link', {
+    link: { leftId, rightId }
+  });
+};
+
+window.deleteLink = (leftId, rightId) => {
+  window.socket.emit('delete-link', {
+    link: { leftId, rightId }
+  });
+};
+
+
+// const loggedEvents = [
+//   'index-links',
+//   'add-link',
+//   'delete-link',
+//   'find-links'
+// ];
+//
+// for (let event of loggedEvents) {
+//   socket.on(event, (data) => {
+//     console.log(event, data);
+//   });
+// }

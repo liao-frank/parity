@@ -2,7 +2,7 @@ import {
   REQUEST_HALF,
   RECEIVE_HALF,
   INVALIDATE_HALF
-} from '../actions/halfActions';
+} from '../actions';
 
 export default (
   state = {
@@ -22,27 +22,33 @@ export default (
   const { type, half } = action;
   switch(type) {
     case REQUEST_HALF:
-    return Object.assign({}, state, {
-      [half]: Object.assign({}, state[half], {
-        isFetching: true,
-        didInvalidate: false
-      })
-    });
+      return {
+        ...state,
+        [half]: {
+          ...state[half],
+          isFetching: true,
+          didInvalidate: false
+        }
+      };
     case RECEIVE_HALF:
-      return Object.assign({}, state, {
-        [half]: Object.assign({}, state[half], {
+      return {
+        ...state,
+        [half]: {
+          ...state[half],
           isFetching: false,
           didInvalidate: false,
           items: action.items,
           lastUpdated: action.receivedAt
-        })
-      });
+        }
+      };
     case INVALIDATE_HALF:
-      return Object.assign({}, state, {
-        [half]: Object.assign({}, state[half], {
+      return {
+        ...state,
+        [half]: {
+          ...state[half],
           didInvalidate: true
-        })
-      });
+        }
+      };
     default:
       return state;
   }
