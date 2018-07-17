@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import Parity from './components/Parity';
-import LeftHalf from './components/LeftHalf';
-import RightHalf from './components/RightHalf';
+import LeftHalf from './models/LeftHalf';
+import RightHalf from './models/RightHalf';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';

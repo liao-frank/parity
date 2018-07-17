@@ -1,85 +1,84 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
+import { LINKS_SOCKET_URL } from '../../consts';
 import {
-  storeSocket,
+  setHalfClass,
+  setSocket,
   receiveAllLinks,
   receiveAddedLinks,
   receiveDeletedLinks,
   fetchLinksIfNeeded
 } from '../../store/actions';
+import HalfMenu from '../HalfMenu';
 
 import './Parity.css';
 
 class Parity extends Component {
   constructor(props) {
     super(props);
-    const { dispatch } = this.props;
-    this.state = {
-      LeftHalf: props.LeftHalf,
-      RightHalf: props.RightHalf
-    };
-    // TODO put this URL away somewhere as a constant
-    const socket = io('http://localhost:6007');
-    // TODO remove this
-    window.socket = socket;
-    this.setEvents(socket);
-    dispatch(storeSocket(socket));
+    this.initSocket();
+    this.initHalves(props.LeftHalf, props.RightHalf);
   }
 
   componentDidUpdate(prevProps) {
-    const { dispatch } = this.props;
-    dispatch(fetchLinksIfNeeded());
+    if (!prevProps.socket && this.props.socket) {
+      this.initLinks();
+    }
   }
 
   render() {
-    const { LeftHalf, RightHalf } = this.state;
     return (
       <div className="parity">
-        <div className="cover">
+        <HalfMenu/>
+        <div className="cover panel">
           <div className="logo logo-parity"></div>
         </div>
-        <LeftHalf
-          half="left"
-        />
-        <RightHalf
-          half="right"
-        />
+        {/* <Playground
+
+        /> */}
       </div>
     );
   }
 
-  onSelect(half, id) {
-    // if half == 'left' {
-    //   Link.findByLeft(id, () => {
-    //
-    //   })
-    // }
+  initHalves(LeftHalf, RightHalf) {
+    this.props.setHalfClass('left', LeftHalf);
+    this.props.setHalfClass('right', RightHalf);
   }
 
-  setEvents(socket) {
-    const { dispatch } = this.props;
-    const dispatchWithError = (error, action) => {
+  initLinks() {
+    this.props.fetchLinksIfNeeded();
+  }
+
+  initSocket() {
+    const { props } = this;
+    const dispatchWithError = (error, dispatcher, data) => {
       if (error) {
         console.error(error);
       }
       else {
-        dispatch(action);
+        dispatcher(data);
       }
     };
 
+    const socket = io(LINKS_SOCKET_URL);
+    // TODO remove this
+    window.socket = socket;
+
     socket.on('index-links', (data) => {
       const { error, links } = data;
-      dispatchWithError(error, receiveAllLinks(links));
+      dispatchWithError(error, props.onIndexLinks, links);
     });
     socket.on('add-link', (data) => {
       const { error, link } = data;
-      dispatchWithError(error, receiveAddedLinks(link));
+      dispatchWithError(error, props.onAddLink, link);
     });
     socket.on('delete-link', (data) => {
       const { error, link } = data;
-      dispatchWithError(error, receiveDeletedLinks(link));
+      dispatchWithError(error, props.onDeleteLink, link);
     });
+
+    props.setSocket(socket);
   }
 }
 
@@ -89,4 +88,14 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps)(Parity);
+export default connect(
+  mapStateToProps,
+  {
+    onIndexLinks: receiveAllLinks,
+    onAddLink: receiveAddedLinks,
+    onDeleteLink: receiveDeletedLinks,
+    setHalfClass,
+    setSocket,
+    fetchLinksIfNeeded
+  }
+)(Parity);

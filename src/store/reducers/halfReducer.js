@@ -1,4 +1,5 @@
 import {
+  SET_HALF_CLASS,
   REQUEST_HALF,
   RECEIVE_HALF,
   INVALIDATE_HALF
@@ -7,11 +8,13 @@ import {
 export default (
   state = {
     left: {
+      class: {},
       items: {},
       didInvalidate: false,
       isFetching: false
     },
     right: {
+      class: {},
       items: {},
       didInvalidate: false,
       isFetching: false
@@ -19,8 +22,16 @@ export default (
   },
   action
 ) => {
-  const { type, half } = action;
+  const { type, half, halfClass } = action;
   switch(type) {
+    case SET_HALF_CLASS:
+      return {
+        ...state,
+        [half]: {
+          ...state[half],
+          class: halfClass || {}
+        }
+      };
     case REQUEST_HALF:
       return {
         ...state,

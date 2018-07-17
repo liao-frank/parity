@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 
 .parity {
+  display: flex;
   position: relative;
   width: 100vw;
   height: 100vh;
+  overflow: auto;
+}
+.parity .panel:not(:first-child) {
+  border-left: solid 1px var(--primary-border-color);
 }
 
 .cover {
+  position: relative;
+  flex-grow: 1;
+  /* width: 100%; */
+  height: 100%;
+}
+.cover .logo-parity {
   position: absolute;
   top: 47.5%;
   left: 50%;

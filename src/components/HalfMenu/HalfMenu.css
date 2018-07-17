@@ -1,0 +1,6 @@
+.half-menu {
+  flex-basis: 250px;
+}
+.half-menu .header {
+  padding: 0 24px;
+}

@@ -1,7 +1,5 @@
-import { Half, connect } from '../Half';
-
-class RightHalf extends Half {
-  init() {
+class RightHalf {
+  static fetch() {
     return [
       null,
       {
@@ -25,4 +23,4 @@ class RightHalf extends Half {
   }
 }
 
-export default connect(RightHalf);
+export default RightHalf;

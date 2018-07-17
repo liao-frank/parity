@@ -25,10 +25,10 @@ class ManyToMany {
 
   getLinks(side, key, array=false) {
     if (side === 'left') {
-      return this.fromLeft[key];
+      return this.fromLeft[key] || {};
     }
     else if (side === 'right') {
-      return this.fromRight[key];
+      return this.fromRight[key] || {};
     }
     return undefined;
   }

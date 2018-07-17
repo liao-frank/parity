@@ -4,9 +4,8 @@
   --tertiary-background-color: #f8fcfe;
 
   --primary-text-color: #222;
-  --secondary-text-color: #4b89da;
-  --tertiary-text-color: #767676;
-  --quaternary-text-color: #b8b8b8;
+  --secondary-text-color: #767676;
+  --tertiary-text-color: #b8b8b8;
 
   --primary-border-color: rgba(0, 0, 0, .1);
 
@@ -24,7 +23,7 @@ body {
 p {
   color: rgb(118, 118, 118);
   font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1em;
   font-weight: 400;
   letter-spacing: normal;
   line-height: 2em;
@@ -78,6 +77,10 @@ a {
 .icon-32 {
   width: 32px;
   height: 32px;
+}
+
+.icon-link {
+  background-image: url('./assets/link-gray.svg');
 }
 
 .logo-parity {

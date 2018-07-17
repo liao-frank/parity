@@ -1,10 +1,25 @@
 /*
   actions
  */
-export const TOGGLE_ORIENTATION = 'TOGGLE_ORIENTATION';
+export const SET_SHOWING_HALF = 'SET_SHOWING_HALF';
+export const SET_SHOWING_ITEM = 'SET_SHOWING_HALF';
 export const ADD_TOAST = 'ADD_TOAST';
 export const REMOVE_TOAST = 'REMOVE_TOAST';
-export const STORE_SOCKET = 'STORE_SOCKET';
+export const SET_SOCKET = 'SET_SOCKET';
+
+export const setShowingHalf = (half) => {
+  return {
+    type: SET_SHOWING_HALF,
+    half
+  };
+};
+
+export const setShowingItem = (item) => {
+  return {
+    type: SET_SHOWING_ITEM,
+    item
+  };
+};
 
 export const addToast = (toast) => {
   return {
@@ -20,15 +35,9 @@ export const removeToast = (id) => {
   };
 };
 
-export const toggleOrientation = () => {
+export const setSocket = (socket) => {
   return {
-    type: TOGGLE_ORIENTATION
-  };
-};
-
-export const storeSocket = (socket) => {
-  return {
-    type: STORE_SOCKET,
+    type: SET_SOCKET,
     socket
   };
 };

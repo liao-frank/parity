@@ -1,9 +1,3 @@
-import React, { Component } from 'react';
-import { connect as reduxConnect } from 'react-redux';
-import {
-  invalidateHalf,
-  fetchHalfIfNeeded
-} from '../../store/actions';
 
 /**
  * An interface for writing a Half of Parity. This interface includes
@@ -15,42 +9,7 @@ import {
  * by the subclass, then those features will simply not exist for the user.
  * @extends Component
  */
-export class Half extends Component {
-  constructor(props) {
-    super(props);
-    if (!['left', 'right'].includes(props.half)) {
-      throw new Error(`Invalid half specified: ${props.half}`);
-    }
-    this.state = {
-      title: props.title,
-      items: {},
-      didInvalidate: false,
-      isFetching: false,
-      lastUpdated: null
-    }
-    this._init();
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    const { half, halfState } = props;
-    return {
-      ...halfState[half]
-    };
-  }
-
-  render() {
-    const { half } = this.props;
-    const { title, items } = this.state;
-    return (
-      <div
-        className={half + ' half'}
-      >
-        <h1>{title}</h1>
-        <p>{JSON.stringify(items)}</p>
-      </div>
-    );
-  }
-
+class Half {
   /**
    * A method that handles item rendering when items are selected within their
    * panels.
@@ -89,30 +48,4 @@ export class Half extends Component {
   // refresh(callback) {
   //
   // }
-
-  _init(callback) {
-    const { half, dispatch } = this.props;
-    dispatch(fetchHalfIfNeeded(half, this.init));
-  }
-
-  _refresh(callback) {
-    const { half, dispatch } = this.props;
-    dispatch(invalidateHalf(half));
-    dispatch(fetchHalfIfNeeded(half, this.refresh));
-  }
-
-  // _hasCategories() {
-  //
-  // }
 }
-
-const mapStateToProps = (state) => {
-  const { halfState } = state;
-  return {
-    halfState
-  };
-};
-
-export const connect = (Component) => {
-    return reduxConnect(mapStateToProps)(Component);
-};

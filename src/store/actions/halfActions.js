@@ -1,6 +1,7 @@
 /*
   actions
  */
+export const SET_HALF_CLASS = 'SET_HALF_CLASS';
 export const REQUEST_HALF = 'REQUEST_HALF';
 export const RECEIVE_HALF = 'RECEIVE_HALF';
 export const INVALIDATE_HALF = 'INVALIDATE_HALF';
@@ -10,6 +11,14 @@ export const INVALIDATE_HALF = 'INVALIDATE_HALF';
 /*
   creators
  */
+export const setHalfClass = (half, halfClass) => {
+  return {
+    type: SET_HALF_CLASS,
+    half,
+    halfClass
+  };
+};
+
 export const invalidateHalf = (half) => {
   return {
     type: INVALIDATE_HALF,
