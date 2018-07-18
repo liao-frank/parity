@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>refresh-blue</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="refresh-blue">
+            <path d="M14.34,4 C12.3479444,0.848558545 8.34344732,-0.361170702 4.93975296,1.16025416 C1.53605859,2.68167902 -0.233326041,6.47228838 0.786259389,10.0584164 C1.80584482,13.6445445 5.3048106,15.9372895 8.99981093,15.4404581 C12.6948113,14.9436266 15.4638861,11.8080779 15.5,8.08" id="Stroke-1" stroke="#000000"></path>
+            <rect id="Rectangle-9" fill="#000000" fill-rule="nonzero" x="10" y="4" width="5" height="1"></rect>
+            <rect id="Rectangle-9-2" fill="#000000" fill-rule="nonzero" x="14" y="0" width="1" height="5"></rect>
+        </g>
+    </g>
+</svg>

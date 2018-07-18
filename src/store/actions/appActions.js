@@ -2,6 +2,7 @@
   actions
  */
 export const SET_SHOWING_HALF = 'SET_SHOWING_HALF';
+export const TOGGLE_SHOWING_HALF = 'TOGGLE_SHOWING_HALF';
 export const SET_SHOWING_ITEM = 'SET_SHOWING_HALF';
 export const ADD_TOAST = 'ADD_TOAST';
 export const REMOVE_TOAST = 'REMOVE_TOAST';
@@ -11,6 +12,12 @@ export const setShowingHalf = (half) => {
   return {
     type: SET_SHOWING_HALF,
     half
+  };
+};
+
+export const toggleShowingHalf = () => {
+  return {
+    type: TOGGLE_SHOWING_HALF
   };
 };
 

@@ -64,14 +64,14 @@ const fetchHalf = (half, retriever) => {
 };
 
 const shouldFetchHalf = (half, state) => {
-  const halfData = state[half];
+  const halfData = state.halfState[half];
   if (!halfData) {
     return true;
   }
   else if (halfData.isFetching) {
     return false;
   }
-  else if (!halfData.items || Object.keys(halfData.items) === 0) {
+  else if (!halfData.items || Object.keys(halfData.items).length === 0) {
     return true;
   }
   return halfData.didInvalidate;

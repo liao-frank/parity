@@ -1,6 +1,15 @@
 .half-menu {
-  flex-basis: 250px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
 }
 .half-menu .header {
-  padding: 0 24px;
+  position: relative;
+  padding: 0 48px 0 24px;
+}
+.half-menu .header .icon-switch {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
 }

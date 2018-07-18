@@ -1,25 +1,26 @@
+const items = {
+  '1':  {
+
+  },
+  '2':  {
+
+  },
+  '3':  {
+
+  },
+  '4':  {
+
+  },
+  '5':  {
+
+  }
+};
+
 class LeftHalf {
-  static fetch() {
-    return [
-      null,
-      {
-        '1':  {
-
-        },
-        '2':  {
-
-        },
-        '3':  {
-
-        },
-        '4':  {
-
-        },
-        '5':  {
-
-        }
-      }
-    ];
+  static fetch(callback) {
+    setTimeout(() => {
+      callback(null, items);
+    }, 2000);
   }
 }
 

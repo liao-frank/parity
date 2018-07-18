@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HalfList from '../HalfList';
+import HalfMenuOptions from '../HalfMenuOptions';
 import {
   invalidateHalf,
-  fetchHalfIfNeeded
+  fetchHalfIfNeeded,
+  toggleShowingHalf
 } from '../../store/actions';
 
 import './HalfMenu.css';
@@ -15,34 +17,49 @@ export class HalfMenu extends Component {
     this.fetch();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.showingHalf !== this.props.showingHalf) {
+      this.fetch();
+    }
+  }
+
   static getDerivedStateFromProps(props, state) {
     const { halfState, links } = props;
-    const { class: halfClass } = halfState;
-    let title;
-    if (halfClass.title && typeof halfClass.title === 'string') {
-      title = halfClass.title;
-    }
-    else {
-      title = halfClass.name.match(/(\w*)Half/)[1];
-    }
     return {
-      title,
+      halfState,
       links
     };
   }
 
   render() {
-    const { showingHalf, halfState } = this.props;
-    const { title, links } = this.state;
+    const {
+      invalidateHalf,
+      toggleShowingHalf,
+      fetchHalfIfNeeded,
+      showingHalf,
+      halfState } = this.props;
+    const { links } = this.state;
+    const { halfClass } = halfState[showingHalf];
     return (
       <div
         className={showingHalf + ' half-menu panel'}
       >
-        <h1 className="header">{title}</h1>
+        <h1 className="header ellipsis-overflow">
+          {halfClass.title}
+        </h1>
         <HalfList
-          half={showingHalf}
-          items={halfState.items}
+          showingHalf={showingHalf}
+          halfState={halfState}
           links={links}
+        />
+        <HalfMenuOptions
+          showingHalf={showingHalf}
+          halfState={halfState}
+          dispatchers={{
+            invalidateHalf,
+            toggleShowingHalf,
+            fetchHalfIfNeeded
+          }}
         />
       </div>
     );
@@ -52,11 +69,10 @@ export class HalfMenu extends Component {
     const {
       showingHalf,
       halfState,
-      fetchHalfIfNeeded,
-      invalidateHalf
+      fetchHalfIfNeeded
     } = this.props;
-    invalidateHalf(showingHalf);
-    fetchHalfIfNeeded(showingHalf, halfState.class.fetch);
+    // invalidateHalf(showingHalf);
+    fetchHalfIfNeeded(showingHalf, halfState[showingHalf].halfClass.fetch);
   }
 }
 
@@ -64,7 +80,7 @@ const mapStateToProps = (state) => {
   const { appState, halfState, linkState } = state;
   return {
     showingHalf: appState.showingHalf,
-    halfState: halfState[appState.showingHalf],
+    halfState: halfState,
     links: linkState.links
   };
 };
@@ -73,6 +89,7 @@ export default connect(
   mapStateToProps,
   {
     invalidateHalf,
-    fetchHalfIfNeeded
+    fetchHalfIfNeeded,
+    toggleShowingHalf
   }
 )(HalfMenu);

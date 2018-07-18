@@ -4,14 +4,25 @@ import HalfListItem from '../HalfListItem';
 import './HalfList.css';
 
 const HalfList = (props) => {
-  const { half, items, links } = props;
+  const { showingHalf, halfState, links } = props;
+  const { items, isFetching } = halfState[showingHalf];
   const itemsWithIds = Object.keys(items).map((_parityId) => {
     return {...items[_parityId], _parityId};
   });
   return (
-    <ul className="half-list">
-      { generateGroup(half, itemsWithIds, links) }
-    </ul>
+    !isFetching ? (
+      <ul className="half-list">
+        { generateGroup(showingHalf, itemsWithIds, links) }
+      </ul>
+    ) :
+    (
+      <div className="half-list">
+        <p className="loading-message">
+          Loading
+          <div className="icon icon-16 icon-refresh"></div>
+        </p>
+      </div>
+    )
   );
 };
 

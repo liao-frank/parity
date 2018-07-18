@@ -3,6 +3,17 @@
   width: 100%;
   flex-grow: 1;
   padding: 4px 0 4px 0;
-  
+
   list-style: none;
+}
+.half-list .loading-message {
+  width: fit-content;
+  padding-left: 24px;
+}
+.half-list .loading-message .icon-refresh {
+  position: relative;
+  top: 2px;
+  margin-left: 6px;
+  background-image: url('../../assets/refresh-gray.svg');
+  animation: spin 3s linear infinite;
 }

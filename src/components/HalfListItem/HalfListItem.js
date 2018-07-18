@@ -7,10 +7,10 @@ const HalfListItem = (props) => {
   const { item, links } = props;
   const linkCount = Object.keys(links).length;
   return (
-    <li className="half-item">
+    <li className="half-item ellipsis-overflow">
       { item._parityName  || item._parityId }
       <span className="link-count">
-        <span className="icon icon-12 icon-link"></span>
+        <span className="icon icon-16 icon-link"></span>
         { linkCount === 1 ? '' : linkCount }
       </span>
     </li>

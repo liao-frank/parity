@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="39px" height="19px" viewBox="0 0 39 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="switch-black" transform="translate(0.000000, -21.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group-2" transform="translate(0.000000, 21.000000)">
+                <path d="M29.146,11.604 L3.408,11.604 C2.58,11.604 1.908,10.933 1.908,10.104 C1.908,9.275 2.58,8.604 3.408,8.604 L29.145,8.604 C32.647,8.604 35.497,5.755 35.497,2.253 C35.497,1.424 36.169,0.753 36.997,0.753 C37.825,0.753 38.497,1.424 38.497,2.253 C38.497,7.41 34.302,11.604 29.146,11.604 Z" id="Shape"></path>
+                <g id="Group" transform="translate(0.000000, 1.000000)">
+                    <path d="M8.741,17.415 C8.339,17.415 7.938,17.254 7.642,16.936 L1.309,10.126 C0.746,9.52 0.78,8.57 1.386,8.006 C1.991,7.442 2.941,7.476 3.506,8.083 L9.839,14.893 C10.402,15.499 10.368,16.449 9.762,17.013 C9.474,17.282 9.107,17.415 8.741,17.415 Z" id="Shape"></path>
+                    <path d="M2.408,10.604 C2.042,10.604 1.676,10.471 1.387,10.203 C0.781,9.639 0.745,8.69 1.31,8.083 L7.643,1.272 C8.209,0.664 9.158,0.632 9.763,1.195 C10.369,1.759 10.405,2.708 9.84,3.315 L3.507,10.126 C3.211,10.444 2.81,10.604 2.408,10.604 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
