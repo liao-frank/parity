@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import './HalfListItem.css';
 
 const HalfListItem = (props) => {
-  const { item, links } = props;
+  const { item, links, onSelectItem, isSelected } = props;
   const linkCount = Object.keys(links).length;
   return (
-    <li className="half-item ellipsis-overflow">
+    <li
+      className={
+        'half-item ellipsis-overflow' + (isSelected ? ' selected' : '')
+      }
+      onClick={() => { onSelectItem(item) }}
+    >
       { item._parityName  || item._parityId }
       <span className="link-count">
         <span className="icon icon-16 icon-link"></span>

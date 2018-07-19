@@ -11,15 +11,39 @@
   border-left: solid 1px var(--primary-border-color);
 }
 
-.cover {
+.menu .header:first-child {
   position: relative;
-  flex-grow: 1;
-  /* width: 100%; */
-  height: 100%;
+  padding: 20px 48px 20px 24px;
+  margin: 0;
 }
-.cover .logo-parity {
-  position: absolute;
-  top: 47.5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.menu .search-wrapper {
+  padding: 0 24px;
+  /* background-color: var(--secondary-background-color); */
+}
+
+.menu-list {
+  overflow: auto;
+  width: 100%;
+  flex-grow: 1;
+  padding: 4px 0 4px 0;
+
+  list-style: none;
+}
+.menu-list p {
+  width: fit-content;
+  padding: 0 24px;
+}
+.menu-list .icon-refresh {
+  position: relative;
+  top: 2px;
+  margin-left: 6px;
+  background-image: url('../../assets/refresh-gray.svg');
+  animation: spin 3s linear infinite;
 }

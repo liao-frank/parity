@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import { LINKS_SOCKET_URL } from '../../consts';
 import {
   setHalfClass,
+  fetchHalfIfNeeded,
   setSocket,
   receiveAllLinks,
   receiveAddedLinks,
@@ -11,6 +12,8 @@ import {
   fetchLinksIfNeeded
 } from '../../store/actions';
 import HalfMenu from '../HalfMenu';
+import Playground from '../Playground';
+import LinkMenu from '../LinkMenu';
 
 import './Parity.css';
 
@@ -31,19 +34,17 @@ class Parity extends Component {
     return (
       <div className="parity">
         <HalfMenu/>
-        <div className="cover panel">
-          <div className="logo logo-parity"></div>
-        </div>
-        {/* <Playground
-
-        /> */}
+        <Playground/>
+        {/* <LinkMenu/> */}
       </div>
     );
   }
 
   initHalves(LeftHalf, RightHalf) {
     this.props.setHalfClass('left', LeftHalf);
+    this.props.fetchHalfIfNeeded('left', LeftHalf.fetch);
     this.props.setHalfClass('right', RightHalf);
+    this.props.fetchHalfIfNeeded('right', RightHalf.fetch);
   }
 
   initLinks() {
@@ -95,6 +96,7 @@ export default connect(
     onAddLink: receiveAddedLinks,
     onDeleteLink: receiveDeletedLinks,
     setHalfClass,
+    fetchHalfIfNeeded,
     setSocket,
     fetchLinksIfNeeded
   }

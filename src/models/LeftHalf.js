@@ -1,3 +1,5 @@
+import Half from './Half';
+
 const items = {
   '1':  {
 
@@ -16,7 +18,7 @@ const items = {
   }
 };
 
-class LeftHalf {
+class LeftHalf extends Half {
   static fetch(callback) {
     setTimeout(() => {
       callback(null, items);

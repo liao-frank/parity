@@ -12,6 +12,9 @@
   --slow-transition: 1.4s ease;
   --med-transition: 0.4s ease;
   --fast-transition: 0.15s ease;
+
+  --small-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.07);
+  --med-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.07);
 }
 
 body {

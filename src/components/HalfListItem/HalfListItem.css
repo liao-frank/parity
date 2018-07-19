@@ -6,9 +6,11 @@
   font-size: 13px;
   line-height: 13px;
   cursor: pointer;
-}
-.half-item.active {
 
+  transition: background-color var(--fast-transition);
+}
+.half-item.selected {
+  background-color: var(--secondary-background-color);
 }
 .half-item:hover {
   background-color: var(--secondary-background-color);
@@ -24,6 +26,8 @@
   color: var(--tertiary-text-color);
   font-size: 12px;
   line-height: 12px;
+
+  user-select: none;
 }
 
 .half-item .link-count .icon-link {

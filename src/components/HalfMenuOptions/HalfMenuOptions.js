@@ -11,7 +11,7 @@ const HalfMenuOptions = (props) => {
     <div className="half-menu-options">
       <div
         className="option ellipsis-overflow"
-        onClick={dispatchers.toggleShowingHalf}
+        onClick={dispatchers.onToggleHalf}
       >
         <div
           className={
@@ -28,7 +28,7 @@ const HalfMenuOptions = (props) => {
           () => {
             [showingHalf, otherHalf].forEach((half) => {
               dispatchers.invalidateHalf(half);
-              dispatchers.fetchHalfIfNeeded(half, halfState[half].halfClass.fetch);
+              dispatchers.onFetch(half, halfState[half].halfClass.fetch);
             });
           }
         }

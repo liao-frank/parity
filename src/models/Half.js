@@ -1,3 +1,4 @@
+import React from 'react';
 
 /**
  * An interface for writing a Half of Parity. This interface includes
@@ -15,8 +16,12 @@ class Half {
    * panels.
    * @return {[type]} [description]
    */
-  renderItem(item) {
-
+  static renderItem(item) {
+    return (
+      <div>
+        { JSON.stringify(item) }
+      </div>
+    );
   }
 
   /**
@@ -30,7 +35,7 @@ class Half {
    * @param  {Function} callback async data handler, accepts (err, items)
    * @return {Array}            OPTIONAL [err, items]
    */
-  init(callback) {
+  static init(callback) {
 
   }
 
@@ -49,3 +54,5 @@ class Half {
   //
   // }
 }
+
+export default Half;

@@ -1,6 +1,6 @@
 .half-menu-options {
   height: fit-content;
-  padding: 12px 24px;
+  padding: 8px 24px 12px 24px;
   box-sizing: border-box;
   background-color: var(--secondary-background-color);
 
@@ -30,7 +30,7 @@
 }
 .option:hover {
   background-color: #fff;
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--small-shadow);
 }
 
 .option .icon {

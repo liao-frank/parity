@@ -4,35 +4,52 @@ import HalfListItem from '../HalfListItem';
 import './HalfList.css';
 
 const HalfList = (props) => {
-  const { showingHalf, halfState, links } = props;
-  const { items, isFetching } = halfState[showingHalf];
-  const itemsWithIds = Object.keys(items).map((_parityId) => {
-    return {...items[_parityId], _parityId};
-  });
-  return (
-    !isFetching ? (
-      <ul className="half-list">
-        { generateGroup(showingHalf, itemsWithIds, links) }
-      </ul>
-    ) :
-    (
-      <div className="half-list">
-        <p className="loading-message">
+  const { items, isFetching } = props;
+
+
+  if (isFetching) {
+    return (
+      <div className="menu-list">
+        <p>
           Loading
-          <div className="icon icon-16 icon-refresh"></div>
+          <span className="icon icon-16 icon-refresh"></span>
         </p>
       </div>
-    )
-  );
+    );
+  }
+  else if (items.length === 0) {
+    return (
+      <div className="menu-list">
+        <p>
+          Nothing to see here.
+        </p>
+      </div>
+    );
+  }
+  else {
+    return (
+      <ul className="menu-list">
+        { generateGroup(props, items) }
+      </ul>
+    );
+  }
 };
 
-const generateGroup = (half, items, links) => {
+const generateGroup = (props, items) => {
+  const {
+    showingHalf: half,
+    showingItem,
+    links,
+    onSelectItem
+  } = props;
   return items.map((item) => {
     return (
       <HalfListItem
         key={item._parityId}
         item={item}
+        isSelected={showingItem._parityId === item._parityId}
         links={links.getLinks(half, item._parityId)}
+        onSelectItem={onSelectItem}
       />
     );
   });

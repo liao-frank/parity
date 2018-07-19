@@ -1,0 +1,18 @@
+.cover {
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+}
+.cover .logo-parity {
+  position: absolute;
+  top: 47.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.playground {
+  flex-grow: 1;
+  padding: 20px 24px;
+}
+.playground .header:nth-of-type(1) {
+  margin-top: 0;
+}

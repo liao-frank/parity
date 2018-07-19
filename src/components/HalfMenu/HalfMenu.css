@@ -1,12 +1,3 @@
-.half-menu {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-}
-.half-menu .header {
-  position: relative;
-  padding: 0 48px 0 24px;
-}
 .half-menu .header .icon-switch {
   position: absolute;
   top: 50%;
