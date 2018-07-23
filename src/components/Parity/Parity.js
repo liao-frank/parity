@@ -35,7 +35,7 @@ class Parity extends Component {
       <div className="parity">
         <HalfMenu/>
         <Playground/>
-        {/* <LinkMenu/> */}
+        <LinkMenu/>
       </div>
     );
   }
@@ -65,7 +65,9 @@ class Parity extends Component {
     const socket = io(LINKS_SOCKET_URL);
     // TODO remove this
     window.socket = socket;
-
+    socket.on('connect', () => {
+      socket.emit('index-links', {});
+    });
     socket.on('index-links', (data) => {
       const { error, links } = data;
       dispatchWithError(error, props.onIndexLinks, links);

@@ -3,7 +3,10 @@ import {
   TOGGLE_SHOWING_HALF,
   SET_SHOWING_ITEM,
   SET_SOCKET,
-  SET_SEARCH_FILTER
+  SET_SEARCH_FILTER,
+  SET_LINK_FILTER,
+  TOGGLE_ACTIVE_LINKS_ONLY,
+  TOGGLE_LINK_PANEL
 } from '../actions';
 
 const localStorage = window.localStorage;
@@ -11,13 +14,20 @@ let defaultShowingHalf = localStorage.getItem('showingHalf');
 if (defaultShowingHalf !== 'left' && defaultShowingHalf !== 'right') {
   defaultShowingHalf = 'left';
 }
+let defaultActiveLinksOnly = localStorage.getItem('activeLinksOnly') &&
+  localStorage.getItem('activeLinksOnly').match(/true/);
+let defaultLinkPanel = localStorage.getItem('linkPanel') &&
+  localStorage.getItem('linkPanel').match(/true/);
 
 export default (
   state = {
     showingHalf: defaultShowingHalf,
     showingItem: {},
     socket: null,
-    searchFilter: ''
+    searchFilter: '',
+    linkFilter: '',
+    activeLinksOnly: defaultActiveLinksOnly,
+    linkPanel: defaultLinkPanel
   },
   action
 ) => {
@@ -52,6 +62,25 @@ export default (
       return {
         ...state,
         searchFilter: filter
+      };
+    case SET_LINK_FILTER:
+      return {
+        ...state,
+        linkFilter: filter
+      };
+    case TOGGLE_ACTIVE_LINKS_ONLY:
+      const nextActiveLinksOnly = !state.activeLinksOnly;
+      localStorage.setItem('activeLinksOnly', nextActiveLinksOnly);
+      return {
+        ...state,
+        activeLinksOnly: nextActiveLinksOnly
+      };
+    case TOGGLE_LINK_PANEL:
+      const nextLinkPanel = !state.linkPanel;
+      localStorage.setItem('linkPanel', nextLinkPanel);
+      return {
+        ...state,
+        linkPanel: nextLinkPanel
       };
     default:
       return state;

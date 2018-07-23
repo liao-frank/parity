@@ -1,0 +1,54 @@
+.item-list-item {
+  position: relative;
+  height: 13px;
+  padding: 10px 48px 10px 24px;
+
+  font-size: 13px;
+  line-height: 13px;
+
+  transition: background-color var(--fast-transition);
+}
+
+.item-list-item.selectable {
+  cursor: pointer;
+}
+
+.item-list-item.selectable.selected {
+  background-color: var(--secondary-background-color);
+}
+.item-list-item.selectable:hover {
+  background-color: var(--secondary-background-color);
+}
+
+.item-list-item .accent {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+
+  text-align: right;
+  color: var(--tertiary-text-color);
+  font-size: 12px;
+  line-height: 12px;
+
+  user-select: none;
+}
+
+.item-list-item .link-count .icon-link {
+  vertical-align: text-bottom;
+}
+
+.item-list-item .icon-checkmark {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity var(--fast-transition);
+}
+
+.item-list-item.selectable:hover .icon-checkmark {
+  opacity: 0.25;
+}
+
+.item-list-item.selectable.selected .icon-checkmark {
+  opacity: 0.85;
+}

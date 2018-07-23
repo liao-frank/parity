@@ -27,23 +27,3 @@
   padding: 0 24px;
   /* background-color: var(--secondary-background-color); */
 }
-
-.menu-list {
-  overflow: auto;
-  width: 100%;
-  flex-grow: 1;
-  padding: 4px 0 4px 0;
-
-  list-style: none;
-}
-.menu-list p {
-  width: fit-content;
-  padding: 0 24px;
-}
-.menu-list .icon-refresh {
-  position: relative;
-  top: 2px;
-  margin-left: 6px;
-  background-image: url('../../assets/refresh-gray.svg');
-  animation: spin 3s linear infinite;
-}

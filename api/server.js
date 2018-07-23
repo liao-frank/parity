@@ -2,7 +2,11 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const { PORT, USE_WEBSOCKETS } = require(__dirname + '/config.js');
+const {
+  PORT,
+  USE_WEBSOCKETS,
+  ADDRESS
+} = require(__dirname + '/config.js');
 
 const LinkSockets = require(__dirname + '/sockets/LinkSockets.js');
 
@@ -12,7 +16,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server, {
   transports: USE_WEBSOCKETS ? ['polling', 'websocket'] : ['polling']
 });
-io.set('origins', 'http://localhost:*');
+io.set('origins', '*:*');
 
 
 app.get('/', function (req, res) {
@@ -28,4 +32,4 @@ io.on('connection', (socket) => {
 });
 
 // start server
-server.listen(PORT);
+server.listen(PORT, ADDRESS || 'localhost');

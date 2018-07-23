@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import fuzzy from 'fuzzy';
-import HalfList from '../HalfList';
+import { itemMapToList, filterItemList } from '../../utils/ItemHelper';
+import ItemList from '../ItemList';
+import ItemListItem from '../ItemListItem';
 import HalfMenuOptions from '../HalfMenuOptions';
 import SearchBar from '../SearchBar';
+
 import {
   invalidateHalf,
   fetchHalfIfNeeded,
@@ -39,6 +41,7 @@ export class HalfMenu extends Component {
       links
     } = this.props;
     const { halfClass, items, isFetching } = halfState[showingHalf];
+
     return (
       <div className="menu half-menu panel">
         <h1 className="header ellipsis-overflow">
@@ -47,13 +50,29 @@ export class HalfMenu extends Component {
         <div className="search-wrapper">
           <SearchBar onSearch={onSearch}/>
         </div>
-        <HalfList
-          showingHalf={showingHalf}
-          showingItem={showingItem}
+        <ItemList
           items={this.processItems(items)}
           isFetching={isFetching}
-          links={links}
-          onSelectItem={onSelectItem}
+          generateListItem={(item) => {
+            const itemLinks = links.getLinks(showingHalf, item._parityId);
+            const linkCount = Object.keys(itemLinks).length;
+
+            return (
+              <ItemListItem
+                key={item._parityId}
+                item={item}
+                isSelected={showingItem._parityId === item._parityId}
+                onSelect={onSelectItem}
+                accent={(
+                  linkCount !== 0 &&
+                  <span className="link-count">
+                    <span className="icon icon-16 icon-link"></span>
+                    { linkCount === 1 ? '' : linkCount }
+                  </span>
+                )}
+              />
+            );
+          }}
         />
         <HalfMenuOptions
           showingHalf={showingHalf}
@@ -81,23 +100,11 @@ export class HalfMenu extends Component {
    */
   processItems(itemMap) {
     const { searchFilter } = this.props;
-    const itemsWithIds = Object.keys(itemMap).map((_parityId) => {
-      return { ...itemMap[_parityId], _parityId };
-    });
+    const itemList = itemMapToList(itemMap);
     if (searchFilter) {
-      const searchOptions = {
-        extract: (item) => { return item._parityName || item._parityId; }
-      };
-      const searchResults = fuzzy.filter(searchFilter, itemsWithIds, searchOptions);
-      const filteredItems = searchResults.map((result) => {
-        return {
-          ...result.original,
-          _parityName: result.string
-        };
-      });
-      return filteredItems;
+      return filterItemList(itemList, searchFilter);
     }
-    return itemsWithIds;
+    return itemList;
   }
 }
 

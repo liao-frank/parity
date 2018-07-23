@@ -1,0 +1,35 @@
+.link-menu {
+  overflow: hidden;
+  opacity: 1;
+  transition: all var(--fast-transition), width var(--med-transition);
+}
+
+.link-menu:not(.active) {
+  width: 0;
+}
+
+.link-menu-content-wrapper {
+  width: 250px;
+}
+
+.link-menu .icon-right-arrow,
+.link-menu .icon-edit {
+  position: absolute;
+  top: 18px;
+  right: 12px;
+  transform: translateY(-50%);
+  opacity: 0.5;
+
+  transition: opacity var(--fast-transition);
+
+  cursor: pointer;
+}
+.link-menu .icon-right-arrow:hover,
+.link-menu .icon-edit:hover {
+  opacity: 1;
+}
+.link-menu:not(.active) .icon-right-arrow,
+.link-menu.active .icon-edit {
+  opacity: 0;
+  pointer-events: none;
+}

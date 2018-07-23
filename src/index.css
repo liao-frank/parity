@@ -125,6 +125,15 @@ a {
 .icon-refresh {
   background-image: url('./assets/refresh-black.svg');
 }
+.icon-checkmark {
+  background-image: url('./assets/checkmark-black.svg');
+}
+.icon-right-arrow {
+  background-image: url('./assets/right-arrow-black.svg');
+}
+.icon-edit {
+  background-image: url('./assets/edit-black.svg');
+}
 .logo-parity {
 
 }

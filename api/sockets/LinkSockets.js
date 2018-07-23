@@ -27,6 +27,20 @@ const emitError = (socket, event, msg) => {
   });
 };
 
+
+const invalidIds = ['undefined'];
+const validLink = (link) => {
+  let valid = true;
+  const { leftId, rightId } = link;
+  if (!leftId || !rightId) {
+    return false;
+  }
+  if (invalidIds.includes(leftId) || invalidIds.includes(rightId)) {
+    return false;
+  }
+  return true;
+};
+
 const LinkSockets = (socket) => {
   const INDEX_LINKS = 'index-links';
   socket.on(INDEX_LINKS, () => {
@@ -36,12 +50,13 @@ const LinkSockets = (socket) => {
   const ADD_LINK = 'add-link';
   socket.on(ADD_LINK, (data) => {
     const { link } = data;
-    if (link) {
+    console.log(ADD_LINK, link);
+    if (link && validLink(link)) {
       Link.save(link,
         getEmitter(socket, ADD_LINK, 'link', broadcast=true));
     }
     else {
-      emitError(socket, ADD_LINK, 'no link specified');
+      emitError(socket, ADD_LINK, 'invalid link specified');
     }
   });
 

@@ -11,6 +11,16 @@ const Playground = (props) => {
     linkedRenderer
   } = props;
 
+  const linkedContent = !linkedItems.length ?
+    (
+      <p>Nothing.</p>
+    ) :
+    (
+      linkedItems.map(item => {
+          return <div key={item._parityId}>{linkedRenderer(item)}</div>;
+      })
+    );
+
   return (
     (showingItem && Object.keys(showingItem).length !== 0) ?
     (
@@ -19,9 +29,7 @@ const Playground = (props) => {
         { showingRenderer(showingItem) }
         <br/>
         <h1 className="header">Linked To</h1>
-        { linkedItems.map(item => {
-            return <div key={item._parityId}>{linkedRenderer(item)}</div>;
-        })}
+        { linkedContent }
       </div>
     ) :
     (

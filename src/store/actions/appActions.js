@@ -8,6 +8,9 @@ export const ADD_TOAST = 'ADD_TOAST';
 export const REMOVE_TOAST = 'REMOVE_TOAST';
 export const SET_SOCKET = 'SET_SOCKET';
 export const SET_SEARCH_FILTER = 'SET_SEARCH_FILTER';
+export const SET_LINK_FILTER = 'SET_LINK_FILTER';
+export const TOGGLE_ACTIVE_LINKS_ONLY = 'TOGGLE_ACTIVE_LINKS_ONLY';
+export const TOGGLE_LINK_PANEL = 'TOGGLE_LINK_PANEL';
 
 export const setShowingHalf = (half) => {
   return {
@@ -54,5 +57,24 @@ export const setSearchFilter = (filter) => {
   return {
     type: SET_SEARCH_FILTER,
     filter
+  };
+};
+
+export const setLinkFilter = (filter) => {
+  return {
+    type: SET_LINK_FILTER,
+    filter
+  };
+};
+
+export const toggleActiveLinksOnly = () => {
+  return {
+    type: TOGGLE_ACTIVE_LINKS_ONLY
+  };
+};
+
+export const toggleLinkPanel = () => {
+  return {
+    type: TOGGLE_LINK_PANEL
   };
 };
