@@ -1,20 +1,40 @@
-.cover {
-  overflow: hidden;
-  position: relative;
-  flex-grow: 1;
-  height: 100%;
-}
-.cover .logo-parity {
+.playground .logo-parity {
   position: absolute;
   top: 47.5%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 .playground {
-  overflow: hidden;
-  flex-grow: 1;
+  position: relative;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1;
   padding: 20px 24px;
+  box-sizing: border-box;
 }
 .playground .header:nth-of-type(1) {
   margin-top: 0;
+}
+
+.playground .header {
+  margin-top: 40px;
+}
+
+.playground .icon-edit {
+  position: absolute;
+  top: 18px;
+  right: 12px;
+  transform: translateY(-50%);
+  opacity: 0;
+
+  transition: opacity var(--fast-transition);
+
+  cursor: pointer;
+}
+.playground .icon-edit.active {
+  opacity: 0.5;
+}
+.playground .icon-edit.active:hover {
+  opacity: 1;
 }

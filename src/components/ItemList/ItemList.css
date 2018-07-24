@@ -1,8 +1,9 @@
 .list {
   overflow: auto;
   width: 100%;
-  flex-grow: 1;
-  padding: 4px 0 4px 0;
+  flex: 1;
+  /* padding: 4px 0 4px 0; */
+  margin-top: 20px;
 
   list-style: none;
 }

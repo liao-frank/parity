@@ -6,6 +6,7 @@
   width: 100vw;
   height: 100vh;
   overflow: auto;
+  transform: translate3d(0, 0, 0);
 }
 .parity .panel:not(:first-child) {
   border-left: solid 1px var(--primary-border-color);
@@ -20,10 +21,10 @@
 .menu {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 300px;
+  height: 100%;
 }
 
 .menu .search-wrapper {
   padding: 0 24px;
-  /* background-color: var(--secondary-background-color); */
 }

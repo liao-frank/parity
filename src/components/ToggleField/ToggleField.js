@@ -11,11 +11,13 @@ const ToggleField = (props) => {
 
   return (
     <div className="toggle-field">
-      <div
-        className={'toggle' + (status ? ' toggled' : '')}
-        onClick={onToggle}
-      ></div>
-      <p>{label}</p>
+      <div className="flex-row">
+        <div
+          className={'toggle' + (status ? ' toggled' : '')}
+          onClick={onToggle}
+        ></div>
+        <p>{label}</p>
+      </div>
     </div>
   );
 };

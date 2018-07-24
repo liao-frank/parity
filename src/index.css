@@ -1,7 +1,7 @@
 :root {
   --primary-background-color: #fff;
   --secondary-background-color: #f5f5f5;
-  --tertiary-background-color: #f8fcfe;
+  --tertiary-background-color: #A8A8A8;
 
   --primary-text-color: #222;
   --secondary-text-color: #767676;
@@ -21,6 +21,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
+}
+
+h3.header {
+  text-transform: none;
+  letter-spacing: 0.25px;
 }
 
 p {
@@ -133,6 +138,9 @@ a {
 }
 .icon-edit {
   background-image: url('./assets/edit-black.svg');
+}
+.icon-close {
+  background-image: url('./assets/close-gray.svg');
 }
 .logo-parity {
 

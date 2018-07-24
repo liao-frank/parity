@@ -25,7 +25,6 @@ const LinkMenu = (props) => {
     searchFilter,
     onSearch,
     onClose,
-    onOpen,
     toggleActiveLinksOnly,
     activeLinksOnly
   } = props;
@@ -35,18 +34,14 @@ const LinkMenu = (props) => {
     <div className={
       'menu link-menu panel' + (active ? ' active' : '')
     }>
-      <div className="link-menu-content-wrapper">
+      <div className="menu">
         <h1 className="header">Links</h1>
         <div
           className="icon icon-24 icon-right-arrow"
           onClick={onClose}
         ></div>
-        <div
-          className="icon icon-16 icon-edit"
-          onClick={onOpen}
-        ></div>
         <div className="search-wrapper">
-          <SearchBar onSearch={onSearch}/>
+          <SearchBar onSearch={onSearch} currentValue={searchFilter}/>
         </div>
         <br/>
         <ToggleField
@@ -133,6 +128,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   onSearch: setLinkFilter,
   toggleActiveLinksOnly,
-  onClose: toggleLinkPanel,
-  onOpen: toggleLinkPanel
+  onClose: toggleLinkPanel
 })(LinkMenu);

@@ -1,4 +1,5 @@
 import React from 'react';
+import AutoFixedSizeList from '../AutoFixedSizeList';
 
 import './ItemList.css';
 
@@ -27,9 +28,9 @@ const ItemList = (props) => {
   }
   else {
     return (
-      <ul className="list">
+      <AutoFixedSizeList itemHeight={33}>
         { items.map(generateListItem) }
-      </ul>
+      </AutoFixedSizeList>
     );
   }
 };

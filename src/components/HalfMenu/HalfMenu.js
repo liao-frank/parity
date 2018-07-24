@@ -38,7 +38,8 @@ export class HalfMenu extends Component {
       showingHalf,
       showingItem,
       halfState,
-      links
+      links,
+      searchFilter
     } = this.props;
     const { halfClass, items, isFetching } = halfState[showingHalf];
 
@@ -48,7 +49,7 @@ export class HalfMenu extends Component {
           {halfClass.title}
         </h1>
         <div className="search-wrapper">
-          <SearchBar onSearch={onSearch}/>
+          <SearchBar onSearch={onSearch} currentValue={searchFilter}/>
         </div>
         <ItemList
           items={this.processItems(items)}

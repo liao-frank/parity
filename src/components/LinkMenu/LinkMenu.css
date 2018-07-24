@@ -1,19 +1,16 @@
 .link-menu {
   overflow: hidden;
+  visibility: visible;
   opacity: 1;
   transition: all var(--fast-transition), width var(--med-transition);
 }
 
 .link-menu:not(.active) {
+  visibility: hidden;
   width: 0;
 }
 
-.link-menu-content-wrapper {
-  width: 250px;
-}
-
-.link-menu .icon-right-arrow,
-.link-menu .icon-edit {
+.link-menu .icon-right-arrow {
   position: absolute;
   top: 18px;
   right: 12px;
@@ -24,12 +21,10 @@
 
   cursor: pointer;
 }
-.link-menu .icon-right-arrow:hover,
-.link-menu .icon-edit:hover {
+.link-menu .icon-right-arrow:hover {
   opacity: 1;
 }
-.link-menu:not(.active) .icon-right-arrow,
-.link-menu.active .icon-edit {
+.link-menu:not(.active) .icon-right-arrow {
   opacity: 0;
   pointer-events: none;
 }
