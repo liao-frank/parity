@@ -28,7 +28,7 @@ const ItemList = (props) => {
   }
   else {
     return (
-      <AutoFixedSizeList itemHeight={33}>
+      <AutoFixedSizeList className="list">
         { items.map(generateListItem) }
       </AutoFixedSizeList>
     );

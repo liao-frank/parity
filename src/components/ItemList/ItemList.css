@@ -9,6 +9,7 @@
 }
 .list p {
   width: fit-content;
+  margin: 0;
   padding: 0 24px;
 }
 .list .icon-refresh {
