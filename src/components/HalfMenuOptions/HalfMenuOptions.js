@@ -1,10 +1,11 @@
 import React from 'react';
+import { getOtherHalf, RIGHT_HALF } from '../../utils/HalfHelper';
 
 import './HalfMenuOptions.css';
 
 const HalfMenuOptions = (props) => {
   const { showingHalf, halfState, dispatchers } = props;
-  const otherHalf = showingHalf === 'left' ? 'right' : 'left';
+  const otherHalf = getOtherHalf(showingHalf);
   const isRefreshing = halfState[showingHalf].isFetching ||
     halfState[otherHalf].isFetching;
   return (
@@ -16,7 +17,7 @@ const HalfMenuOptions = (props) => {
         <div
           className={
             'icon icon-12 icon-switch' +
-            (showingHalf === 'right' ? ' switched' : '')
+            (showingHalf === RIGHT_HALF ? ' switched' : '')
           }
         ></div>
         Switch to { halfState[otherHalf].halfClass.title }

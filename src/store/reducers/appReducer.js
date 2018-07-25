@@ -8,11 +8,12 @@ import {
   TOGGLE_ACTIVE_LINKS_ONLY,
   TOGGLE_LINK_PANEL
 } from '../actions';
+import { getOtherHalf, isValidHalf, LEFT_HALF } from '../../utils/HalfHelper';
 
 const localStorage = window.localStorage;
 let defaultShowingHalf = localStorage.getItem('showingHalf');
-if (defaultShowingHalf !== 'left' && defaultShowingHalf !== 'right') {
-  defaultShowingHalf = 'left';
+if (!isValidHalf(defaultShowingHalf)) {
+  defaultShowingHalf = LEFT_HALF;
 }
 let defaultActiveLinksOnly = localStorage.getItem('activeLinksOnly') &&
   localStorage.getItem('activeLinksOnly').match(/true/);
@@ -41,7 +42,7 @@ export default (
         showingItem: {}
       };
     case TOGGLE_SHOWING_HALF:
-      const newHalf = state.showingHalf === 'left' ? 'right' : 'left';
+      const newHalf = getOtherHalf(state.showingHalf);
       localStorage.setItem('showingHalf', newHalf);
       return {
         ...state,

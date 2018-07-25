@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
+import { LEFT_HALF, RIGHT_HALF } from '../../utils/HalfHelper';
 import { LINKS_SOCKET_URL } from '../../consts';
 import {
   setHalfClass,
@@ -41,10 +42,10 @@ class Parity extends Component {
   }
 
   initHalves(LeftHalf, RightHalf) {
-    this.props.setHalfClass('left', LeftHalf);
-    this.props.fetchHalfIfNeeded('left', LeftHalf.fetch);
-    this.props.setHalfClass('right', RightHalf);
-    this.props.fetchHalfIfNeeded('right', RightHalf.fetch);
+    this.props.setHalfClass(LEFT_HALF, LeftHalf);
+    this.props.fetchHalfIfNeeded(LEFT_HALF, LeftHalf.fetch);
+    this.props.setHalfClass(RIGHT_HALF, RightHalf);
+    this.props.fetchHalfIfNeeded(RIGHT_HALF, RightHalf.fetch);
   }
 
   initLinks() {

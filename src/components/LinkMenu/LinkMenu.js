@@ -5,6 +5,7 @@ import SearchBar from '../SearchBar';
 import ItemList from '../ItemList';
 import ItemListItem from '../ItemListItem';
 import ToggleField from '../ToggleField';
+import { getOtherHalf, LEFT_HALF } from '../../utils/HalfHelper';
 import {
   setLinkFilter,
   toggleActiveLinksOnly,
@@ -86,7 +87,7 @@ const LinkMenu = (props) => {
 };
 
 const generateLink = (showingHalf, showingItem, otherItem) => {
-  return showingHalf === 'left' ? {
+  return showingHalf === LEFT_HALF ? {
     leftId: showingItem._parityId,
     rightId: otherItem._parityId
   } : {
@@ -109,7 +110,7 @@ const processItems = (itemMap, searchFilter, showingLinkMap) => {
 const mapStateToProps = (state) => {
   const { appState, halfState, linkState } = state;
   const { socket, showingHalf, showingItem, activeLinksOnly } = appState;
-  const otherHalf = showingHalf === 'left' ? 'right' : 'left';
+  const otherHalf = getOtherHalf(showingHalf);
   const otherHalfItemMap = halfState[otherHalf].items;
 
   return {

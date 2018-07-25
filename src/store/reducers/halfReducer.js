@@ -4,17 +4,18 @@ import {
   RECEIVE_HALF,
   INVALIDATE_HALF
 } from '../actions';
+import { LEFT_HALF, RIGHT_HALF } from '../../utils/HalfHelper';
 
 export default (
   state = {
-    left: {
-      class: {},
+    [LEFT_HALF]: {
+      halfClass: {},
       items: {},
       didInvalidate: false,
       isFetching: false
     },
-    right: {
-      class: {},
+    [RIGHT_HALF]: {
+      halfClass: {},
       items: {},
       didInvalidate: false,
       isFetching: false

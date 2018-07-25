@@ -1,3 +1,5 @@
+import { LEFT_HALF, RIGHT_HALF } from '../../utils/HalfHelper';
+
 const deepCopy = (obj) => {
   return Object.entries(obj).reduce(
     (copy, [key, value]) => {
@@ -24,10 +26,10 @@ class ManyToMany {
   }
 
   getLinks(side, key, array=false) {
-    if (side === 'left') {
+    if (side === LEFT_HALF) {
       return this.fromLeft[key] || {};
     }
-    else if (side === 'right') {
+    else if (side === RIGHT_HALF) {
       return this.fromRight[key] || {};
     }
     return undefined;

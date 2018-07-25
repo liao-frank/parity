@@ -55,10 +55,15 @@ const fetchHalf = (half, retriever) => {
         dispatch(receiveHalf(half, items));
       }
     };
-
-    const [err, items] = retriever(onRetrieve) || [];
-    if (err || items) {
-      onRetrieve(err, items);
+    const result = retriever(onRetrieve);
+    if (result) {
+      if (Array.isArray(result)) {
+        const [err, items] = result;
+        onRetrieve(err, items);
+      }
+      else if (typeof result === 'object') {
+        onRetrieve(null, result);
+      }
     }
   };
 };

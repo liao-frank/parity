@@ -17,11 +17,6 @@ import {
 import './HalfMenu.css';
 
 export class HalfMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.fetch();
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.showingHalf !== this.props.showingHalf) {
       this.fetch();

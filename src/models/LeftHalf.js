@@ -21,6 +21,9 @@ const items = {
 class LeftHalf extends Half {
   static fetch(callback) {
     setTimeout(() => {
+      for (let id in items) {
+        items[id]['_parityId'] = id;
+      }
       callback(null, items);
     }, 2000);
   }

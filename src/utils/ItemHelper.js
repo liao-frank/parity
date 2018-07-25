@@ -2,7 +2,7 @@ import fuzzy from 'fuzzy';
 
 export const itemMapToList = (itemMap) => {
   const itemsWithIds = Object.keys(itemMap).map((_parityId) => {
-    return { ...itemMap[_parityId], _parityId };
+    return itemMap[_parityId];
   });
   return itemsWithIds;
 };

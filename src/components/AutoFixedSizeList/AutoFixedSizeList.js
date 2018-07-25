@@ -24,6 +24,7 @@ class AutoFixedSizeList extends Component {
       itemCount: 0,
       testingItemHeight: true
     }
+    this.onWindowResize = this.onWindowResize.bind(this);
     this.debouncedOnWindowResize = _.debounce(
       this.onWindowResize,
       100

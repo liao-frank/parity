@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getOtherHalf } from '../../utils/HalfHelper';
 import { toggleLinkPanel } from '../../store/actions';
 import PlaygroundItem from '../PlaygroundItem';
 
@@ -58,7 +59,7 @@ const Playground = (props) => {
 const mapStateToProps = (state) => {
   const { appState, halfState, linkState } = state;
   const { showingHalf, showingItem } = appState;
-  const otherHalf = showingHalf === 'left' ? 'right' : 'left';
+  const otherHalf = getOtherHalf(showingHalf);
   const linkMap = linkState.links.getLinks(showingHalf, showingItem._parityId);
 
   const showingRenderer = halfState[showingHalf].halfClass.renderItem;

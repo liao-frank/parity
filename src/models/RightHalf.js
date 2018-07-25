@@ -20,6 +20,9 @@ const items = {
 
 class RightHalf extends Half {
   static fetch() {
+    for (let id in items) {
+      items[id]['_parityId'] = id;
+    }
     return [
       null,
       items
