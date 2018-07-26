@@ -93,7 +93,7 @@ class AutoFixedSizeList extends Component {
   onWindowResize() {
     const { ref } = this;
     this.setState({
-      height: ref.offsetHeight
+      height: ref ? ref.offsetHeight : 0
     });
   }
 
