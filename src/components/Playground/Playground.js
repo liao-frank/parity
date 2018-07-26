@@ -17,9 +17,10 @@ class Playground extends Component {
     if (prevShowingItem._parityId === showingItem._parityId) {
       if (linkedItems.length - prevLinkedItems.length === 1) {
         if (this.playgroundRef) {
+          const lastChild = this.playgroundRef.lastChild;
           window.Velocity(this.playgroundRef,
             {
-              scrollTop: `${this.playgroundRef.offsetHeight}px`
+              scrollTop: `${lastChild.offsetHeight + lastChild.offsetTop}px`
             },
             {
               duration: 150,
