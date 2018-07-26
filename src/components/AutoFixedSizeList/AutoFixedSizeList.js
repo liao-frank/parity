@@ -41,6 +41,10 @@ class AutoFixedSizeList extends Component {
   componentDidMount() {
     if (this.props.children.length) {
       this.onWindowResize();
+      // Safari initial offset dimensions always wrong...
+      setTimeout(() => {
+        this.onWindowResize();
+      }, 3000);
       this.getItemHeight();
       window.addEventListener('resize', this.debouncedOnWindowResize);
     }

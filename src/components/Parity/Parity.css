@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
 
 .parity {
   display: flex;
@@ -6,6 +6,7 @@
   width: 100vw;
   height: 100vh;
   overflow: auto;
+  background-color: var(--primary-background-color);
   transform: translate3d(0, 0, 0);
 }
 .parity .panel:not(:first-child) {

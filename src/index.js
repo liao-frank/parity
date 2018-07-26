@@ -21,32 +21,8 @@ ReactDOM.render(
   document.getElementById('root'));
 registerServiceWorker();
 
-window.getLinks = () => {
-  window.socket.emit('index-links', {});
 }
 
-window.addLink = (leftId, rightId) => {
-  window.socket.emit('add-link', {
-    link: { leftId, rightId }
-  });
 };
 
-window.deleteLink = (leftId, rightId) => {
-  window.socket.emit('delete-link', {
-    link: { leftId, rightId }
-  });
 };
-
-
-// const loggedEvents = [
-//   'index-links',
-//   'add-link',
-//   'delete-link',
-//   'find-links'
-// ];
-//
-// for (let event of loggedEvents) {
-//   socket.on(event, (data) => {
-//     console.log(event, data);
-//   });
-// }

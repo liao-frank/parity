@@ -9,13 +9,15 @@ export const itemMapToList = (itemMap) => {
 
 export const filterItemList = (list, filter) => {
   const searchOptions = {
-    extract: (item) => { return item._parityName || item._parityId; }
+    extract: (item) => { return item._parityName || item._parityId },
+    pre: '<em>',
+    post: '</em>'
   };
   const searchResults = fuzzy.filter(filter, list, searchOptions);
   const filteredItems = searchResults.map((result) => {
     return {
       ...result.original,
-      _parityName: result.string
+      _paritySearchName: result.string
     };
   });
   return filteredItems;
