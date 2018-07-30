@@ -1,6 +1,5 @@
 module.exports = {
-  PORT: 6007,
+  PORT: 6008,
   USE_WEBSOCKETS: false,
-  DB: __dirname + '/db/test.db',
-  ADDRESS: '10.8.36.202'
+  DB: __dirname + '/db/storybook-dsm.db'
 };
