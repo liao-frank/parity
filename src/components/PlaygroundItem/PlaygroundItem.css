@@ -2,6 +2,12 @@
   overflow: hidden;
   margin: 15px 0 35px 0;
 }
+.playground-item.no-render {
+  margin: 15px 0;
+}
+.playground-item.no-render .header {
+  margin: 0;
+}
 .playground-item-render {
   margin: 0 24px;
 }

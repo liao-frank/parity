@@ -19,7 +19,7 @@ const ItemListItem = (props) => {
       }
       else if (wrap) {
         wrap = false;
-        return (<em>{ node }</em>);
+        return (<em key={node}>{ node }</em>);
       }
       return node;
     });

@@ -1,12 +1,12 @@
 import {
-  SET_SHOWING_HALF,
   TOGGLE_SHOWING_HALF,
   SET_SHOWING_ITEM,
   SET_SOCKET,
   SET_SEARCH_FILTER,
   SET_LINK_FILTER,
   TOGGLE_ACTIVE_LINKS_ONLY,
-  TOGGLE_LINK_PANEL
+  TOGGLE_LINK_PANEL,
+  TOGGLE_RENDER_ITEMS
 } from '../actions';
 import { getOtherHalf, isValidHalf, LEFT_HALF } from '../../utils/HalfHelper';
 
@@ -19,6 +19,8 @@ let defaultActiveLinksOnly = localStorage.getItem('activeLinksOnly') &&
   localStorage.getItem('activeLinksOnly').match(/true/);
 let defaultLinkPanel = localStorage.getItem('linkPanel') &&
   localStorage.getItem('linkPanel').match(/true/);
+let defaultRenderItems = localStorage.getItem('renderItems') &&
+  localStorage.getItem('renderItems').match(/true/);
 
 export default (
   state = {
@@ -27,20 +29,14 @@ export default (
     socket: null,
     searchFilter: '',
     linkFilter: '',
-    activeLinksOnly: defaultActiveLinksOnly,
-    linkPanel: defaultLinkPanel
+    activeLinksOnly: defaultActiveLinksOnly || false,
+    linkPanel: defaultLinkPanel || false,
+    renderItems: defaultRenderItems || false
   },
   action
 ) => {
-  const { type, half, item, filter } = action;
+  const { type, item, filter } = action;
   switch(type) {
-    case SET_SHOWING_HALF:
-      localStorage.setItem('showingHalf', half);
-      return {
-        ...state,
-        showingHalf: half,
-        showingItem: {}
-      };
     case TOGGLE_SHOWING_HALF:
       const newHalf = getOtherHalf(state.showingHalf);
       localStorage.setItem('showingHalf', newHalf);
@@ -82,6 +78,13 @@ export default (
       return {
         ...state,
         linkPanel: nextLinkPanel
+      };
+    case TOGGLE_RENDER_ITEMS:
+      const nextRenderItems = !state.renderItems;
+      localStorage.setItem('renderItems', nextRenderItems);
+      return {
+        ...state,
+        renderItems: nextRenderItems
       };
     default:
       return state;

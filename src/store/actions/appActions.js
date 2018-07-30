@@ -1,7 +1,6 @@
 /*
   actions
  */
-export const SET_SHOWING_HALF = 'SET_SHOWING_HALF';
 export const TOGGLE_SHOWING_HALF = 'TOGGLE_SHOWING_HALF';
 export const SET_SHOWING_ITEM = 'SET_SHOWING_ITEM';
 export const ADD_TOAST = 'ADD_TOAST';
@@ -11,13 +10,7 @@ export const SET_SEARCH_FILTER = 'SET_SEARCH_FILTER';
 export const SET_LINK_FILTER = 'SET_LINK_FILTER';
 export const TOGGLE_ACTIVE_LINKS_ONLY = 'TOGGLE_ACTIVE_LINKS_ONLY';
 export const TOGGLE_LINK_PANEL = 'TOGGLE_LINK_PANEL';
-
-export const setShowingHalf = (half) => {
-  return {
-    type: SET_SHOWING_HALF,
-    half
-  };
-};
+export const TOGGLE_RENDER_ITEMS = 'TOGGLE_RENDER_ITEMS';
 
 export const toggleShowingHalf = () => {
   return {
@@ -76,5 +69,11 @@ export const toggleActiveLinksOnly = () => {
 export const toggleLinkPanel = () => {
   return {
     type: TOGGLE_LINK_PANEL
+  };
+};
+
+export const toggleRenderItems = () => {
+  return {
+    type: TOGGLE_RENDER_ITEMS
   };
 };

@@ -13,12 +13,9 @@
   padding: 20px 24px;
   box-sizing: border-box;
 }
-.playground .header:nth-of-type(1) {
-  margin-top: 0;
-}
 
 .playground .header {
-  margin-top: 40px;
+  margin: 0 0 12px 0;
 }
 .playground .icon-edit {
   position: absolute;
@@ -36,4 +33,9 @@
 }
 .playground .icon-edit.active:hover {
   opacity: 1;
+}
+
+.playground .toggle-field {
+  width: 200px;
+  padding: 0;
 }

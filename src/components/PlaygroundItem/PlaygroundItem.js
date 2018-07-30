@@ -5,7 +5,7 @@ import './PlaygroundItem.css';
 const PlaygroundItem = (props) => {
   const { item, renderer } = props;
 
-  const itemRender = (
+  const itemRender = renderer ? (
     <div className="playground-item-render">
       {
         item && Object.keys(item).length > 1 ? (
@@ -15,10 +15,15 @@ const PlaygroundItem = (props) => {
         )
       }
     </div>
-  );
+  ) : null;
+
   return (
-    <div className="playground-item">
-      <h3 className="header">{item._parityName || item._parityId}</h3>
+    <div
+      className={'playground-item' + (renderer ? '' : ' no-render')}
+    >
+      <h3 className="header">
+        {item._parityName || item._parityId}
+      </h3>
         { itemRender }
     </div>
   );
