@@ -24,8 +24,8 @@
   "scripts": {
     "start:api": "cd api && node server.js",
     "start:react": "react-scripts start",
-    "build:react": "react-scripts build",
-    "test:react": "react-scripts test --env=jsdom",
-    "eject:react": "react-scripts eject"
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
