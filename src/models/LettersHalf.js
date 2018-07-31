@@ -1,4 +1,4 @@
-import Half from './Half';
+import React from 'react';
 
 const items = {
   'a':  {
@@ -18,16 +18,21 @@ const items = {
   }
 };
 
-class LettersHalf extends Half {
-  static fetch() {
+export default {
+  title: 'Letters',
+  fetch: (callback) => {
+    // map `_parityId`s into `Item` instances
     for (let id in items) {
       items[id]['_parityId'] = id;
     }
-    return [
-      null,
-      items
-    ];
+
+    callback(null, items);
+  },
+  renderItem: (item) => {
+    return (
+      <div>
+        { JSON.stringify(item) }
+      </div>
+    );
   }
-}
-LettersHalf.title = 'Letters';
-export default LettersHalf;
+};

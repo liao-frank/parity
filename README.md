@@ -25,11 +25,7 @@ Visit http://localhost:6008/ to view Parity.
 ## Development
 ### Setup
 ```
-// start API dev server
-$ npm run dev:api
-
-// start React dev server
-$ npm run dev:react
+$ npm run dev
 ```
 
 Visit http://localhost:3000/ to start watching.
@@ -42,38 +38,41 @@ The objective of Parity is to manage connections between two "halves" of a many-
 ```javascript
 {
   /*
-    A human-readable title for the half.
+    A human-readable title for the half. Rendered in UI.
    */
   'title': String,
 
-  /*
-    A function that handles data retrieval on initial population, and on refresh.
-    Use the provided callback with format `callback(err, itemMap)`.
-
-    The `itemMap` should be an object mapping of `_parityId`s  to respective
-    `Item` representations (see section below).
-   */  
+  /**
+   * A function that handles data retrieval on initial population, and on refresh.
+   *
+   * @param  {Function} callback      see callback params below
+   *    @param  {Error}   err           the error to throw   
+   *    @param  {Object}  itemMap       an object mapping of `_parityId`s to
+   *                                    respective `Item` instances
+   */
   'fetch': Function(callback),
 
-  /*
-    A function that returns a rendering of a visual representation of a given item
-    representation. Feel free to import your own components here.
-   */
-  'renderItem': Function(item)
+   /**
+    * A function that returns a rendering of a visual representation of a given
+    * `Item` instance. Feel free to import and use your own components here.
+    *
+    * @param  {Object} item           the provided `Item` instance to render
+    */
+    'renderItem': Function(item)
 }
 ```
 
-### The `Item` representation
+### `Item` data structure
 Items are just object representations of singular entities within each half. You may keep whatever data in these objects that you need to render a good visual representation. However, Parity requires the following properties in order to handle these items correctly:
 ```javascript
 {
   /*
-    A unique identifier for the item.
+    A unique identifier for the item. Used in linking entities.
    */
   '_parityId': String,
 
   /*
-    A human-readable title of the item.
+    A human-readable name of the item. Rendered in UI.
    */
   '_parityName': String,
 

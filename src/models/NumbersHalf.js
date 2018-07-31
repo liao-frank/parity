@@ -1,33 +1,30 @@
-import Half from './Half';
+import React from 'react';
 
 const items = {
-  '1':  {
-
-  },
-  '2':  {
-
-  },
-  '3':  {
-
-  },
-  '4':  {
-
-  },
-  '5':  {
-
-  }
+  '1':  {},
+  '2':  {},
+  '3':  {},
+  '4':  {},
+  '5':  {}
 };
 
-class NumbersHalf extends Half {
-  static fetch(callback) {
+export default {
+  title: 'Numbers',
+  fetch: (callback) => {
+    // map `_parityId`s into `Item` instances
+    for (let id in items) {
+      items[id]['_parityId'] = id;
+    }
+
     setTimeout(() => {
-      for (let id in items) {
-        items[id]['_parityId'] = id;
-      }
       callback(null, items);
     }, 2000);
+  },
+  renderItem: (item) => {
+    return (
+      <div>
+        { JSON.stringify(item) }
+      </div>
+    );
   }
-}
-
-NumbersHalf.title = 'Numbers';
-export default NumbersHalf;
+};
