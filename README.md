@@ -39,7 +39,7 @@ The objective of Parity is to manage connections between two "halves" of a many-
 
 
 `Half` models can be defined as objects that must expose the following properties:
-```
+```javascript
 {
   /*
     A human-readable title for the half.
@@ -65,17 +65,17 @@ The objective of Parity is to manage connections between two "halves" of a many-
 
 ### The `Item` representation
 Items are just object representations of singular entities within each half. You may keep whatever data in these objects that you need to render a good visual representation. However, Parity requires the following properties in order to handle these items correctly:
-```
+```javascript
 {
   /*
     A unique identifier for the item.
    */
-  _parityId: String,
+  '_parityId': String,
 
   /*
     A human-readable title of the item.
    */
-  _parityName: String,
+  '_parityName': String,
 
   ...otherPropsYouNeed
 }
