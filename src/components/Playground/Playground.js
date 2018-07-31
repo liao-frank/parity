@@ -35,14 +35,11 @@ class Playground extends Component {
 
   render() {
     const {
-      showingItem,
-      showingRenderer,
-      linkedItems,
-      linkedRenderer,
-      showingLinkPanel,
-      onOpenLinkPanel,
-      renderingItems,
-      onToggleRenderItems
+      showingItem, showingRenderer, showingHalfTitle,
+      otherHalfTitle,
+      linkedItems, linkedRenderer,
+      showingLinkPanel, renderingItems,
+      onOpenLinkPanel, onToggleRenderItems
     } = this.props;
 
     const linkedContent = !linkedItems.length ?
@@ -76,7 +73,7 @@ class Playground extends Component {
             }
             onClick={onOpenLinkPanel}
           ></div>
-          <h1 className="header">Item</h1>
+          <h1 className="header">{showingHalfTitle} Item</h1>
           <PlaygroundItem
             item={showingItem}
             renderer={showingRenderer}
@@ -86,7 +83,7 @@ class Playground extends Component {
 
           <ToggleField
             status={renderingItems}
-            label="Render Linked Items"
+            label={`Render ${otherHalfTitle} items`}
             onToggle={onToggleRenderItems}
           />
           { linkedContent }
@@ -116,8 +113,10 @@ const mapStateToProps = (state) => {
   });
   const linkedRenderer = halfState[otherHalf].halfClass.renderItem;
   return {
+    showingHalfTitle: halfState[showingHalf].halfClass.title,
     showingItem,
     showingRenderer,
+    otherHalfTitle: halfState[otherHalf].halfClass.title,
     linkedItems,
     linkedRenderer,
     showingLinkPanel: appState.linkPanel,

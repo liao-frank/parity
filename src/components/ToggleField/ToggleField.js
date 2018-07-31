@@ -6,7 +6,8 @@ const ToggleField = (props) => {
   const {
     status,
     onToggle,
-    label
+    label,
+    align
   } = props;
 
   return (
@@ -16,7 +17,7 @@ const ToggleField = (props) => {
           className={'toggle' + (status ? ' toggled' : '')}
           onClick={onToggle}
         ></div>
-        <p>{label}</p>
+        <p className={(align || 'left') + '-align'}>{label}</p>
       </div>
     </div>
   );

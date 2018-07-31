@@ -1,15 +1,23 @@
 .toggle-field {
-  align-items: center;
   padding: 0 24px;
   box-sizing: border-box;
+}
+
+.toggle-field .flex-row {
+  align-items: center;
 }
 
 .toggle-field p {
   flex: 1;
   margin: 0;
-  margin-left: 12px;
-  text-align: right;
+  margin-left: 16px;
   font-size: 14px;
+}
+.toggle-field p.left-align {
+
+}
+.toggle-field p.right-align {
+  text-align: right;
 }
 
 .toggle {

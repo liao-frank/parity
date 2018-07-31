@@ -49,6 +49,7 @@ const LinkMenu = (props) => {
           status={activeLinksOnly}
           onToggle={toggleActiveLinksOnly}
           label="Show Active Links Only"
+          align="right"
         />
         <ItemList
           items={

@@ -1,13 +1,14 @@
 .playground-item {
   overflow: hidden;
-  margin: 15px 0 35px 0;
+  margin: 15px 0 25px 0;
 }
 .playground-item.no-render {
   margin: 15px 0;
 }
-.playground-item.no-render .header {
-  margin: 0;
+.playground-item .header {
+  margin: 0 0 6px 0;
 }
 .playground-item-render {
-  margin: 0 24px;
+  padding: 4px 20px;
+  border-left: solid 1px var(--primary-border-color);
 }
