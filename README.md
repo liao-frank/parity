@@ -14,8 +14,8 @@ $ npm install
 
 ## Running Parity
 ```
-$ npm run build:react
-$ npm run start:api
+$ npm run build
+$ npm run start
 ```
 
 Visit http://localhost:6008/ to view Parity.
@@ -23,11 +23,11 @@ Visit http://localhost:6008/ to view Parity.
 ## Development
 ### Setup
 ```
-// start Parity service as normal.
-$ npm run start:api
+// start API dev server
+$ npm run dev:api
 
 // start React dev server
-$ npm run start:react
+$ npm run dev:react
 ```
 
 Visit http://localhost:3000/ to start watching.
