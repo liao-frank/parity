@@ -83,7 +83,7 @@ Items are just object representations of singular entities within each half. You
 Within `src/index.js`, import your two `Half` models and add them as props to the `Parity` component instance. Order doesn't matter here; the focused half is toggle-able in the app.
 ```
 <Parity
-  LeftHalf={YourHalfModel}
-  RightHalf={YourOtherHalfModel}
+  LeftHalf={yourHalfModel}
+  RightHalf={yourOtherHalfModel}
 />
 ```
