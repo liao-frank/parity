@@ -1,4 +1,5 @@
 import React from 'react';
+import uuidv4 from 'uuid/v4';
 
 import './ItemListItem.css';
 
@@ -19,7 +20,7 @@ const ItemListItem = (props) => {
       }
       else if (wrap) {
         wrap = false;
-        return (<em key={node}>{ node }</em>);
+        return (<em key={uuidv4()}>{ node }</em>);
       }
       return node;
     });

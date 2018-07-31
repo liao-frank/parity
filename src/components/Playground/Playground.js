@@ -77,7 +77,11 @@ class Playground extends Component {
             onClick={onOpenLinkPanel}
           ></div>
           <h1 className="header">Item</h1>
-          <PlaygroundItem item={showingItem} renderer={showingRenderer}/>
+          <PlaygroundItem
+            item={showingItem}
+            renderer={showingRenderer}
+            key={showingItem._parityId}
+          />
           <h1 className="header">Linked To</h1>
 
           <ToggleField
