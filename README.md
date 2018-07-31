@@ -1,7 +1,7 @@
 # Parity
 A web app solution to consolidating data parity.
 
-This framework provides a React CMS interface, an Express.js API service, and a SQLite database for managing a many-to-many relationship.
+This framework provides a CMS interface, an API service, and a database for managing a many-to-many relationship.
 
 ![CMS Demo](docs/cms-demo.gif)
 
@@ -89,3 +89,11 @@ Within `src/index.js`, import your two `Half` models and add them as props to th
   RightHalf={yourOtherHalfModel}
 />
 ```
+
+## Built with
+- ❤️
+- [SQLite3](https://github.com/mapbox/node-sqlite3)
+- [Express.js](https://github.com/expressjs/express)
+- [React & `create-react-app`](https://github.com/facebook/create-react-app)
+
+by Squarespace
