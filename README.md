@@ -1,9 +1,9 @@
 # Parity
 A web app solution to consolidating data parity.
 
-This framework provides a React CMS interface and an Express.js API service for managing a many-to-many relationship.
+This framework provides a React CMS interface, an Express.js API service, and a SQLite database for managing a many-to-many relationship.
 
-![Link CMS](docs/cms-demo.gif)
+![CMS Demo](docs/cms-demo.gif)
 
 ## Installation
 ```
