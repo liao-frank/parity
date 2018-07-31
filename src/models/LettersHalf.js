@@ -18,7 +18,7 @@ const items = {
   }
 };
 
-class RightHalf extends Half {
+class LettersHalf extends Half {
   static fetch() {
     for (let id in items) {
       items[id]['_parityId'] = id;
@@ -29,5 +29,5 @@ class RightHalf extends Half {
     ];
   }
 }
-
-export default RightHalf;
+LettersHalf.title = 'Letters';
+export default LettersHalf;

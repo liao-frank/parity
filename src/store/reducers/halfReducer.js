@@ -26,9 +26,6 @@ export default (
   const { type, half, halfClass } = action;
   switch(type) {
     case SET_HALF_CLASS:
-      if (halfClass && typeof halfClass === 'function') {
-        halfClass.title = halfClass.title || halfClass.name.match(/(\w*)Half/)[1];
-      }
       return {
         ...state,
         [half]: {

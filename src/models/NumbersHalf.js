@@ -18,7 +18,7 @@ const items = {
   }
 };
 
-class LeftHalf extends Half {
+class NumbersHalf extends Half {
   static fetch(callback) {
     setTimeout(() => {
       for (let id in items) {
@@ -29,4 +29,5 @@ class LeftHalf extends Half {
   }
 }
 
-export default LeftHalf;
+NumbersHalf.title = 'Numbers';
+export default NumbersHalf;

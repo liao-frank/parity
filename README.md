@@ -3,10 +3,12 @@ A web app solution to consolidating data parity.
 
 This framework provides a React CMS interface and an Express.js API service for managing a many-to-many relationship.
 
+![Link CMS](docs/cms-demo.gif)
+
 ## Installation
 ```
 $ git clone https://fliao@code.squarespace.net/scm/~fliao/parity.git
-$ git remote rm origins
+$ git remote rm origin
 $ cd parity
 
 $ npm install
