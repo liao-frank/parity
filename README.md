@@ -4,7 +4,7 @@ A web app solution to consolidating data parity.
 This framework provides a CMS interface, an API service, and a database for managing a many-to-many relationship.
 
 ### What is Parity?
-Parity is a CMS for managing connections between two lists of items, where an item in one list could be connected to many items in the other list.
+Parity is a CMS for managing connections between two lists of items, where an item in one list could be connected to many items in the other list, and vice-versa. These connections will be stored persistently within a database, as well as be live-updated across all open instances of the app.
 
 For example, the demo configures the two lists to be a list of recipes and a list of ingredients. One ingredient might be used in many different recipes, and one recipe might use many different ingredients. Parity provides a way to manage these connections between the two lists.
 
