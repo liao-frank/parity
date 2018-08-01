@@ -5,6 +5,12 @@ This framework provides a CMS interface, an API service, and a database for mana
 
 ![CMS Demo](docs/cms-demo.gif)
 
+### Features
+- _Menu_ panel w/ searchbar and toggle-able focus
+- _Playground_ panel for custom renderings of items
+- _Link_ panel for managing links. Also w/ searchbar and active filter
+- Export links to CSV
+
 ## Installation
 ```
 $ git clone https://fliao@code.squarespace.net/scm/~fliao/parity.git
