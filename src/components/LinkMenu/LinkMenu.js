@@ -5,6 +5,7 @@ import SearchBar from '../SearchBar';
 import ItemList from '../ItemList';
 import ItemListItem from '../ItemListItem';
 import ToggleField from '../ToggleField';
+import LinkMenuOptions from '../LinkMenuOptions';
 import { getOtherHalf, LEFT_HALF } from '../../utils/HalfHelper';
 import {
   setLinkFilter,
@@ -16,20 +17,12 @@ import './LinkMenu.css';
 
 const LinkMenu = (props) => {
   const {
-    active,
-    showingHalf,
-    showingItem,
-    socket,
-    showingLinkMap,
-    itemMap,
-    isFetching,
+    linkModel,
     searchFilter,
-    onSearch,
-    onClose,
-    toggleActiveLinksOnly,
-    activeLinksOnly
+    active, onSearch, onClose,
+    toggleActiveLinksOnly, activeLinksOnly,
+    halfState
   } = props;
-  const isShowingItem = showingItem && Object.keys(showingItem).length !== 0;
 
   return (
     <div className={
@@ -51,41 +44,60 @@ const LinkMenu = (props) => {
           label="Show Active Links Only"
           align="right"
         />
-        <ItemList
-          items={
-            isShowingItem ?
-            processItems(itemMap, searchFilter, activeLinksOnly && showingLinkMap) :
-            []
-          }
-          isFetching={isFetching}
-          generateListItem={(item) => {
-            const linked = item._parityId in showingLinkMap;
-            return (
-              <ItemListItem
-                key={item._parityId}
-                item={item}
-                selectable={isShowingItem}
-                onSelect={() => {
-                  const link = generateLink(showingHalf, showingItem, item);
-                  if (linked && showingItem) {
-                    socket.emit('delete-link', { link });
-                  }
-                  else if (showingItem) {
-                    socket.emit('add-link', { link });
-                  }
-                }}
-                isSelected={linked}
-                accent={
-                  <span className="icon icon-checkmark"></span>
-                }
-              />
-            );
-          }}
-        />
+        { renderItemList(props) }
+      <LinkMenuOptions
+        linkModel={linkModel}
+        halfState={halfState}
+      />
       </div>
     </div>
   );
 };
+
+const renderItemList = (props) => {
+  const {
+    showingHalf, showingItem, showingLinkMap,
+    itemMap,
+    searchFilter, activeLinksOnly,
+    isFetching,
+    socket
+  } = props;
+  const isShowingItem = showingItem && Object.keys(showingItem).length !== 0;
+
+  return (
+    <ItemList
+      items={
+        isShowingItem ?
+        processItems(itemMap, searchFilter, activeLinksOnly && showingLinkMap) :
+        []
+      }
+      isFetching={isFetching}
+      generateListItem={(item) => {
+        const linked = item._parityId in showingLinkMap;
+        return (
+          <ItemListItem
+            key={item._parityId}
+            item={item}
+            selectable={isShowingItem}
+            onSelect={() => {
+              const link = generateLink(showingHalf, showingItem, item);
+              if (linked && showingItem) {
+                socket.emit('delete-link', { link });
+              }
+              else if (showingItem) {
+                socket.emit('add-link', { link });
+              }
+            }}
+            isSelected={linked}
+            accent={
+              <span className="icon icon-checkmark"></span>
+            }
+          />
+        );
+      }}
+    />
+  );
+}
 
 const generateLink = (showingHalf, showingItem, otherItem) => {
   return showingHalf === LEFT_HALF ? {
@@ -115,15 +127,16 @@ const mapStateToProps = (state) => {
   const otherHalfItemMap = halfState[otherHalf].items;
 
   return {
-    showingHalf,
-    showingItem,
+    showingHalf, showingItem,
     socket,
+    linkModel: linkState.links,
     showingLinkMap: linkState.links.getLinks(showingHalf, showingItem._parityId),
     isFetching: halfState[otherHalf].isFetching,
     itemMap: otherHalfItemMap,
     searchFilter: appState.linkFilter,
     active: appState.linkPanel,
-    activeLinksOnly
+    activeLinksOnly,
+    halfState
   };
 };
 

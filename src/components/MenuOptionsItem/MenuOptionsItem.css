@@ -1,0 +1,31 @@
+.menu-options-item {
+  position: relative;
+  padding: 10px 8px 10px 40px;
+  border-radius: 4px;
+
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--fast-transition);
+}
+.menu-options-item:hover {
+  background-color: #fff;
+  box-shadow: var(--small-shadow);
+}
+
+.menu-options-item .icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.menu-options-item .icon-refresh.refreshing {
+  animation: vertical-center-spin 3s linear infinite;
+}
+@keyframes vertical-center-spin {
+  from {
+    transform: translateY(-50%) rotate(00deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}

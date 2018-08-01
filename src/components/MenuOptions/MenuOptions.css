@@ -1,0 +1,18 @@
+.menu-options {
+  height: fit-content;
+  padding: 8px 24px 12px 24px;
+  box-sizing: border-box;
+  background-color: var(--secondary-background-color);
+
+  /* text-transform: uppercase; */
+  letter-spacing: 0.5px;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.menu-options .separator {
+  width: 90%;
+  height: 1px;
+  margin: 5px auto;
+  background-color: var(--primary-border-color);
+}

@@ -81,6 +81,10 @@ a {
   width: 12px;
   height: 12px;
 }
+.icon-14 {
+  width: 14px;
+  height: 14px;
+}
 .icon-16 {
   width: 16px;
   height: 16px;
@@ -141,6 +145,9 @@ a {
 }
 .icon-close {
   background-image: url('./assets/close-gray.svg');
+}
+.icon-download {
+  background-image: url('./assets/download-black.svg');
 }
 .logo-parity {
 

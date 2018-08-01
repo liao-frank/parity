@@ -1,5 +1,7 @@
 import React from 'react';
 import { getOtherHalf, RIGHT_HALF } from '../../utils/HalfHelper';
+import MenuOptions from '../MenuOptions';
+import MenuOptionsItem from '../MenuOptionsItem';
 
 import './HalfMenuOptions.css';
 
@@ -9,9 +11,8 @@ const HalfMenuOptions = (props) => {
   const isRefreshing = halfState[showingHalf].isFetching ||
     halfState[otherHalf].isFetching;
   return (
-    <div className="half-menu-options">
-      <div
-        className="option ellipsis-overflow"
+    <MenuOptions>
+      <MenuOptionsItem
         onClick={dispatchers.onToggleHalf}
       >
         <div
@@ -21,10 +22,9 @@ const HalfMenuOptions = (props) => {
           }
         ></div>
         Switch to { halfState[otherHalf].halfClass.title }
-      </div>
+      </MenuOptionsItem>
       <div className="separator"></div>
-      <div
-        className="option ellipsis-overflow"
+      <MenuOptionsItem
         onClick={
           () => {
             [showingHalf, otherHalf].forEach((half) => {
@@ -40,20 +40,8 @@ const HalfMenuOptions = (props) => {
           }
         ></div>
         Refresh Records
-      </div>
-      {
-        // (halfState[otherHalf].class.create) &&
-        //   (<div className="option ellipsis-overflow">
-        //     Create Record
-        //   </div>)
-      }
-      {
-        // (halfState[otherHalf].class.delete) &&
-        //   (<div className="option ellipsis-overflow">
-        //     Delete Record
-        //   </div>)
-      }
-    </div>
+      </MenuOptionsItem>
+    </MenuOptions>
   );
 };
 
