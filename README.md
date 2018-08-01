@@ -3,13 +3,20 @@ A web app solution to consolidating data parity.
 
 This framework provides a CMS interface, an API service, and a database for managing a many-to-many relationship.
 
-![CMS Demo](docs/cms-demo.gif)
+### What is Parity?
+Parity is a CMS for managing connections between two lists of items, where an item in one list could be connected to many items in the other list.
 
-### Features
-- _Menu_ panel w/ searchbar and toggle-able focus
-- _Playground_ panel for custom renderings of items
-- _Link_ panel for managing links. Also w/ searchbar and active filter
-- Export links to CSV
+For example, the demo configures the two lists to be a list of recipes and a list of ingredients. One ingredient might be used in many different recipes, and one recipe might use many different ingredients. Parity provides a way to manage these connections between the two lists.
+
+
+_Adding bread to my recipes_
+
+![Adding bread link](docs/linking-bread.gif)
+
+
+_Bread shows up when viewing from recipe list_
+
+![Viewing bread link](docs/viewing-bread.gif)
 
 ## Installation
 ```
@@ -36,9 +43,10 @@ $ npm run dev
 
 Visit http://localhost:3000/ to start watching.
 
+Remember to configure your own database file path in `/api/config.js`.
+
 ### Writing `Half` models
 The objective of Parity is to manage connections between two "halves" of a many-to-many relationship. You, the framework user, must define two models that represent these two halves. A `Half` can be visualized as an aggregate model of many "items", each of which can connect to other items in the other `Half`.
-
 
 `Half` models can be defined as objects that must expose the following properties:
 ```javascript
@@ -67,6 +75,8 @@ The objective of Parity is to manage connections between two "halves" of a many-
     'renderItem': Function(item)
 }
 ```
+
+See `Half` models from the demo in `/src/models`.
 
 ### `Item` data structure
 Items are just object representations of singular entities within each half. You may keep whatever data in these objects that you need to render a good visual representation. However, Parity requires the following properties in order to handle these items correctly:
