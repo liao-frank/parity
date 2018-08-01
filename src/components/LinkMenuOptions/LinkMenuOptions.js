@@ -20,7 +20,7 @@ const LinkMenuOptions = (props) => {
   const links = linkModel.fromLeft;
   const CSVdata = [[
     `${leftHalfTitle} id`, `${leftHalfTitle} name`,
-    `${rightHalfTitle} name`, `${rightHalfTitle} name`
+    `${rightHalfTitle} id`, `${rightHalfTitle} name`
   ]];
   for (let leftId in links) {
     const leftName = leftItems[leftId]['_parityName'] || '';
@@ -36,7 +36,11 @@ const LinkMenuOptions = (props) => {
     <MenuOptions>
       <CSVLink
         data={CSVdata}
-        filename={`${leftHalfTitle}_${rightHalfTitle}_links.csv`}
+        filename={
+          `${leftHalfTitle.replace(/\s/g, '_')}-` +
+          `${rightHalfTitle.replace(/\s/g, '_')}-` +
+          `links.csv`
+        }
       >
         <MenuOptionsItem>
           <div className="icon icon-14 icon-download"></div>
