@@ -23,7 +23,7 @@ const ingredients = [
   },
   {
     name: 'Condiments',
-    imgUrl: 'https://images.pexels.com/photos/1124038/pexels-photo-1124038.jpeg?auto=compress&cs=tinysrgb&h=350',
+    imgUrl: 'https://images.unsplash.com/photo-1528750596806-ff12e21cda04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4e06d076f451176a53c29c0b24cbb746&auto=format&fit=crop&w=1500&q=80',
     description: 'Did you know, it is difficult to find public domain images of simple condiments?'
   }
 ];
